@@ -1,2 +1,2 @@
 # ont-stake
-Ontology staking dapp
+A ontology staking app.
