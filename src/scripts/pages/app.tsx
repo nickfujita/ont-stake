@@ -1,6 +1,9 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import * as dapi from '../actions/dapi';
+import HeaderTitle from '../components/HeaderTitle';
+import Connect from '../components/Connect';
+import Account from '../components/Account';
 
 class App extends React.Component<any, any> {
 
@@ -12,7 +15,25 @@ class App extends React.Component<any, any> {
   render() {
     return (
       <div className='index'>
-        hello
+        {this.renderHeader()}
+      </div>
+    );
+  }
+
+  renderHeader() {
+    const { account, balances, dispatch } = this.props;
+    return (
+      <div>
+        <HeaderTitle/>
+        {!account ? <Connect dispatch={dispatch} /> : (
+          <Account
+            address={account.address}
+            label={account.label}
+            ontBalance={balances.ont}
+            canDisconnect={true}
+            onDisconnect={() => dispatch(dapi.disconnect())}
+          />
+        )}
       </div>
     );
   }
