@@ -1,0 +1,40 @@
+.stake-totals-container {
+  .total-stake {
+    padding: 1rem 0;
+    border-bottom: 1px solid lightgrey;
+  }
+
+  .claims {
+    padding: 1rem 0;
+    border-bottom: 1px solid lightgrey;
+
+    .row {
+      display: flex;
+      margin-bottom: 0.5rem;
+
+      .description {
+        font-size: 0.875rem;
+        color: grey;
+      }
+
+      .text-container {
+        flex: 1;
+      }
+
+      .primary-btn {
+        width: 5.5rem;
+        height: 1.5rem;
+      }
+
+      &.empty {
+        .primary-btn {
+          background-color: lightgrey;
+        }
+      }
+    }
+  }
+
+  .help {
+    padding: 1rem 0;
+  }
+}

@@ -4,6 +4,9 @@ import * as dapi from '../actions/dapi';
 import HeaderTitle from '../components/HeaderTitle';
 import Connect from '../components/Connect';
 import Account from '../components/Account';
+import NextRound from '../components/NextRound';
+import StakeTotals from '../components/StakeTotals';
+import StakedNodes from '../components/StakedNodes';
 
 class App extends React.Component<any, any> {
 
@@ -14,8 +17,12 @@ class App extends React.Component<any, any> {
 
   render() {
     return (
-      <div className='index'>
+      <div className='home'>
         {this.renderHeader()}
+        <div className='body-container'>
+          {this.renderLeft()}
+          {this.renderright()}
+        </div>
       </div>
     );
   }
@@ -23,7 +30,7 @@ class App extends React.Component<any, any> {
   renderHeader() {
     const { account, balances, dispatch } = this.props;
     return (
-      <div>
+      <div className='header'>
         <HeaderTitle/>
         {!account ? <Connect dispatch={dispatch} /> : (
           <Account
@@ -34,6 +41,25 @@ class App extends React.Component<any, any> {
             onDisconnect={() => dispatch(dapi.disconnect())}
           />
         )}
+      </div>
+    );
+  }
+
+  renderLeft() {
+    const { dapi } = this.props;
+    const { stakeRoundInfo } = dapi;
+    return (
+      <div className='left-side'>
+        <NextRound remainingBlocks={stakeRoundInfo && stakeRoundInfo.remainingBlocks}/>
+        <StakeTotals />
+      </div>
+    );
+  }
+
+  renderright() {
+    return (
+      <div className='right-side'>
+        <StakedNodes />
       </div>
     );
   }

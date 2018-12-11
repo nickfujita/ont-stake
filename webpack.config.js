@@ -78,13 +78,13 @@ module.exports = (env) => {
           use: {
             loader: 'svg-url-loader',
             options: {
-              noquotes: true,
+              noquotes: false,
               limit: 1000000000
             }
           }
         },
         {
-          test: /\.(jpe?g|png|woff|woff2|ttf|wav|svg)$/,
+          test: /\.(jpe?g|png|woff|woff2|ttf|wav)$/,
           use: 'url-loader',
         },
       ],

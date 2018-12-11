@@ -3,6 +3,7 @@ import {
   UPDATE_ACCOUNT,
   DISCONNECT,
   RESET,
+  UPDATE_STAKE_ROUND_INFO,
 } from '../constants/actions';
 import o3dapi from 'o3-dapi-core';
 import o3dapiOnt from 'o3-dapi-ont';
@@ -19,7 +20,21 @@ export function init() {
           data: networks,
         });
       });
+      dispatch(updateStakeRoundInfo());
     });
+  };
+}
+
+export function updateStakeRoundInfo() {
+  return dispatch => {
+    o3dapi.ONT.stake.getStakeRoundInfo({network: 'MainNet'})
+    .then(data => {
+      dispatch({
+        type: UPDATE_STAKE_ROUND_INFO,
+        data,
+      });
+    })
+    .catch(() => {});
   };
 }
 

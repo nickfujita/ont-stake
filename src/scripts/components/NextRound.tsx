@@ -28,12 +28,12 @@ export default class NextRound extends React.Component<Props, any> {
 
     return (
       <div className='next-round'>
-        <div>
+        <div className='description'>
           <div className='clock-logo'/>
           <div>{'Next round in'}</div>
         </div>
-        <div>
-          <div>{'About ${remainingStr}'}</div>
+        <div className='values'>
+          <div>{`About ${remainingStr}`}</div>
           <div className='remaining-blocks'>{`${remainingBlocks} Blocks`}</div>
         </div>
       </div>

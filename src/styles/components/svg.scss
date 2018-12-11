@@ -1,9 +1,15 @@
 .connect-o3 {
-  background-color: red;
-  -webkit-mask: url('../assets/wallet.svg') no-repeat 50% 50%;
-  -webkit-mask-size: contain;
-  mask: url('../assets/wallet.svg') no-repeat 50% 50%;
-  mask-size: contain;
-  height: 1.3125rem;
-  width: 1.3125rem;
+  background: url('../assets/connectO3.svg');
+  height: 2rem;
+  width: 12rem;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.logo-steak {
+  background: url('../assets/steak.svg');
+  height: 2rem;
+  width: 2rem;
+  background-size: contain;
+  background-repeat: no-repeat;
 }

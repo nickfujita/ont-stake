@@ -2,14 +2,12 @@ import {
   UPDATE_NETWORKS,
   DISCONNECT,
   RESET,
+  UPDATE_STAKE_ROUND_INFO,
 } from '../../constants/actions';
 
 const initialState = {
   networks: [],
-  pendingCompileDetails: null,
-  compileDetails: null,
-  pendingDeployDetails: null,
-  deployDetails: null,
+  stakeRoundInfo: null,
 };
 
 export default function dapi(state = initialState, action) {
@@ -24,6 +22,11 @@ export default function dapi(state = initialState, action) {
       return {
         ...state,
         networks: action.data,
+      };
+    case UPDATE_STAKE_ROUND_INFO:
+      return {
+        ...state,
+        stakeRoundInfo: action.data,
       };
     default:
       return state;
