@@ -4,6 +4,12 @@ import {
   DISCONNECT,
   RESET,
   UPDATE_STAKE_ROUND_INFO,
+  UPDATE_ACCOUNT_BALANCE,
+  UPDATE_ACCOUNT_TOTAL_STAKE,
+  UPDATE_ACCOUNT_STAKE_REWARDS,
+  UPDATE_ACCOUNT_UNCLAIMED,
+  UPDATE_NODE_LIST,
+  UPDATE_ACCOUNT_STAKES,
 } from '../constants/actions';
 import o3dapi from 'o3-dapi-core';
 import o3dapiOnt from 'o3-dapi-ont';
@@ -21,6 +27,7 @@ export function init() {
         });
       });
       dispatch(updateStakeRoundInfo());
+      dispatch(updateNodeList());
     });
   };
 }
@@ -38,6 +45,19 @@ export function updateStakeRoundInfo() {
   };
 }
 
+export function updateNodeList() {
+  return dispatch => {
+    o3dapi.ONT.stake.getNodeList({network: 'MainNet'})
+    .then(data => {
+      dispatch({
+        type: UPDATE_NODE_LIST,
+        data: data.nodes,
+      });
+    })
+    .catch(() => {});
+  };
+}
+
 export function connect() {
   return dispatch => {
     o3dapi.ONT.getAccount()
@@ -46,6 +66,11 @@ export function connect() {
         type: UPDATE_ACCOUNT,
         data: account,
       });
+      dispatch(getBalances(account.address));
+      dispatch(getTotalStake(account.address));
+      dispatch(getRewards(account.address));
+      dispatch(getUnclaimed(account.address));
+      dispatch(getStakes(account.address));
     })
     .catch(() => {});
   };
@@ -68,5 +93,116 @@ export function reset() {
   return dispatch => {
     dispatch(replace('/'));
     dispatch({type: RESET});
+  };
+}
+
+export function getBalances(address: string) {
+  return dispatch => {
+    o3dapi.ONT.assets.getBalance({
+      network: 'MainNet',
+      address,
+    })
+    .then(data => {
+      dispatch({
+        type: UPDATE_ACCOUNT_BALANCE,
+        data,
+      });
+    })
+    .catch(() => {});
+  };
+}
+
+export function getTotalStake(address: string) {
+  return dispatch => {
+    o3dapi.ONT.stake.getTotalStake({
+      network: 'MainNet',
+      address,
+    })
+    .then(data => {
+      dispatch({
+        type: UPDATE_ACCOUNT_TOTAL_STAKE,
+        data,
+      });
+    })
+    .catch(() => {});
+  };
+}
+
+export function getRewards(address: string) {
+  return dispatch => {
+    o3dapi.ONT.stake.getStakedClaimableOngRewards({
+      network: 'MainNet',
+      address,
+    })
+    .then(data => {
+      dispatch({
+        type: UPDATE_ACCOUNT_STAKE_REWARDS,
+        data,
+      });
+    })
+    .catch(() => {});
+  };
+}
+
+export function getUnclaimed(address: string) {
+  return dispatch => {
+    o3dapi.ONT.stake.getStakedClaimableOng({
+      network: 'MainNet',
+      address,
+    })
+    .then(data => {
+      dispatch({
+        type: UPDATE_ACCOUNT_UNCLAIMED,
+        data,
+      });
+    })
+    .catch(() => {});
+  };
+}
+
+export function getStakes(address: string) {
+  return (dispatch, getState) => {
+    const { dapi } = getState();
+    const { nodeList } = dapi;
+
+    let promise = Promise.resolve(nodeList);
+    if (!nodeList) {
+      promise = o3dapi.ONT.stake.getNodeList({network: 'MainNet'})
+      .then(data => data.nodes);
+    }
+
+    promise.then(nodeList => {
+      return Promise.all(nodeList.map(({publicKey}) => {
+        return o3dapi.ONT.stake.getNodeStakeInfo({
+          network: 'MainNet',
+          address,
+          nodePublicKey: publicKey,
+        });
+      }));
+    })
+    .then(data => data.filter(({
+      activeStake,
+      pendingStake,
+      pendingWithdrawStake,
+      withdrawableStake,
+    }) => (
+      activeStake > 0 ||
+      pendingStake > 0 ||
+      pendingWithdrawStake > 0 ||
+      withdrawableStake > 0
+    )))
+    .then(data => data.reduce((accum, item: any) => {
+      accum[item.publicKey] = item;
+      return accum;
+    }, {}))
+    .then(data => {
+      dispatch({
+        type: UPDATE_ACCOUNT_STAKES,
+        data,
+      });
+    })
+    .catch(err => {
+      debugger;
+    });
   };
 }

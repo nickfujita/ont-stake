@@ -13,3 +13,13 @@
   background-size: contain;
   background-repeat: no-repeat;
 }
+
+.logo-check {
+  background-color: #7ED321;
+  -webkit-mask: url('../assets/check.svg') no-repeat 50% 50%;
+  -webkit-mask-size: contain;
+  mask: url('../assets/check.svg') no-repeat 50% 50%;
+  mask-size: contain;
+  height: 1rem;
+  width: 1rem;
+}

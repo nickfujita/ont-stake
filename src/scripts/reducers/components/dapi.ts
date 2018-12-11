@@ -1,23 +1,17 @@
 import {
   UPDATE_NETWORKS,
-  DISCONNECT,
-  RESET,
   UPDATE_STAKE_ROUND_INFO,
+  UPDATE_NODE_LIST,
 } from '../../constants/actions';
 
 const initialState = {
   networks: [],
   stakeRoundInfo: null,
+  nodeList: [],
 };
 
 export default function dapi(state = initialState, action) {
   switch (action.type) {
-    case RESET:
-    case DISCONNECT:
-      return {
-        ...initialState,
-        networks: state.networks,
-      };
     case UPDATE_NETWORKS:
       return {
         ...state,
@@ -27,6 +21,11 @@ export default function dapi(state = initialState, action) {
       return {
         ...state,
         stakeRoundInfo: action.data,
+      };
+    case UPDATE_NODE_LIST:
+      return {
+        ...state,
+        nodeList: action.data,
       };
     default:
       return state;

@@ -1,0 +1,46 @@
+.stake-card {
+  display: flex;
+  padding: 1rem;
+  font-size: 0.75rem;
+  align-items: center;
+  background-color: aliceblue;
+  margin: 0.75rem 0;
+
+  .flex-grow-container {
+    flex: 1;
+    font-weight: 600;
+
+    .name {
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .stake-amounts {
+      display: flex;
+
+      .my-stake {
+        margin-right: 0.5rem;
+      }
+
+      .active-stake {
+        font-weight: 400;
+        color: grey;
+      }
+    }
+  }
+
+  .contrib-percentage {
+    margin-bottom: 1rem;
+    color: grey;
+  }
+
+  .action-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+
+    .action-text {
+      color: grey;
+    }
+  }
+}

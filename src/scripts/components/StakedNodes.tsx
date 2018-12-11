@@ -1,19 +1,28 @@
 import * as React from 'react';
 import { SHRUG } from '../constants/strings';
+import StakeCard from './StakeCard';
 
 interface Props {
-  // remainingBlocks: number;
+  nodeList: any[];
+  stakes: any;
 }
 
 export default class StakedNodes extends React.Component<Props, any> {
 
   render() {
-    // const { remainingBlocks } = this.props;
+    const { stakes } = this.props;
 
     return (
       <div className='staked-nodes-container'>
         <div className='title'>{'Staked Nodes'}</div>
-        {!false ? this.renderEmpty() : this.renderStakes()}
+        {!stakes ? this.renderEmpty() : this.renderStakes()}
+        {stakes ? (
+          <div
+            className='link'
+          >
+            {'View all consensus nodes >'}
+          </div>
+        ) : ''}
       </div>
     );
   }
@@ -36,16 +45,28 @@ export default class StakedNodes extends React.Component<Props, any> {
   }
 
   renderStakes() {
+    const { stakes, nodeList } = this.props;
+
+    const nodes = nodeList.reduce((accum, node) => {
+      const stake = stakes[node.publicKey];
+      if (stake) {
+        accum.push({
+          node,
+          stake,
+        });
+      }
+      return accum;
+    }, []);
+
     return (
-      <div className='empty-stake'>
-        <div className='shrug'>{SHRUG}</div>
-        <div>{'You currently have no ONT staked'}</div>
-        <a href='https://o3.network' className='link'>{'Learn more about staking Ontology'}</a>
-        <div
-          className='primary-btn'
-        >
-          {'Create Stake'}
-        </div>
+      <div className='stake-list'>
+        {nodes.map(({node, stake}, index) => (
+          <StakeCard
+            key={node.publicKey + index}
+            node={node}
+            stake={stake}
+          />
+        ))}
       </div>
     );
   }

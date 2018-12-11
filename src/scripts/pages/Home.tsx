@@ -8,7 +8,7 @@ import NextRound from '../components/NextRound';
 import StakeTotals from '../components/StakeTotals';
 import StakedNodes from '../components/StakedNodes';
 
-class App extends React.Component<any, any> {
+class Home extends React.Component<any, any> {
 
   constructor(props, state) {
     super(props, state);
@@ -21,24 +21,25 @@ class App extends React.Component<any, any> {
         {this.renderHeader()}
         <div className='body-container'>
           {this.renderLeft()}
-          {this.renderright()}
+          {this.renderRight()}
         </div>
       </div>
     );
   }
 
   renderHeader() {
-    const { account, balances, dispatch } = this.props;
+    const { account, dispatch } = this.props;
+    const { details, balances } = account;
     return (
       <div className='header'>
         <HeaderTitle/>
-        {!account ? <Connect dispatch={dispatch} /> : (
+        {!details ? <Connect dispatch={dispatch} /> : (
           <Account
-            address={account.address}
-            label={account.label}
-            ontBalance={balances.ont}
+            address={details.address}
+            label={details.label}
+            ontBalance={balances && balances.ont}
             canDisconnect={true}
-            onDisconnect={() => dispatch(dapi.disconnect())}
+            dispatch={dispatch}
           />
         )}
       </div>
@@ -46,20 +47,32 @@ class App extends React.Component<any, any> {
   }
 
   renderLeft() {
-    const { dapi } = this.props;
+    const { dapi, account } = this.props;
     const { stakeRoundInfo } = dapi;
+    const { totalStake, rewards, unclaimed } = account;
     return (
       <div className='left-side'>
         <NextRound remainingBlocks={stakeRoundInfo && stakeRoundInfo.remainingBlocks}/>
-        <StakeTotals />
+        <StakeTotals
+          totalStake={totalStake && totalStake.amount}
+          rewards={rewards && rewards.amount}
+          unclaimed={unclaimed && unclaimed.amount}
+        />
       </div>
     );
   }
 
-  renderright() {
+  renderRight() {
+    const { dapi, account } = this.props;
+    const { nodeList } = dapi;
+    const { stakes } = account;
+
     return (
       <div className='right-side'>
-        <StakedNodes />
+        <StakedNodes
+          nodeList={nodeList}
+          stakes={stakes}
+        />
       </div>
     );
   }
@@ -69,4 +82,4 @@ function mapStateToProps(state) {
   return state;
 }
 
-export default connect(mapStateToProps)(App);
+export default connect(mapStateToProps)(Home);

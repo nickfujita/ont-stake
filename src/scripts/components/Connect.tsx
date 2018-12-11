@@ -12,7 +12,7 @@ export default class Connect extends React.Component<Props, any> {
     return (
       <div
         className='connect-o3'
-        onClick={() => dispatch(connect)}
+        onClick={() => dispatch(connect())}
       />
     );
   }
