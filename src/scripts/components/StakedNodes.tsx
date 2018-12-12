@@ -1,8 +1,10 @@
 import * as React from 'react';
+import { push } from 'react-router-redux';
 import { SHRUG } from '../constants/strings';
 import StakeCard from './StakeCard';
 
 interface Props {
+  dispatch: any;
   nodeList: any[];
   stakes: any;
 }
@@ -10,19 +12,30 @@ interface Props {
 export default class StakedNodes extends React.Component<Props, any> {
 
   render() {
-    const { stakes } = this.props;
+    const { stakes, dispatch } = this.props;
 
     return (
       <div className='staked-nodes-container'>
-        <div className='title'>{'Staked Nodes'}</div>
-        {!stakes ? this.renderEmpty() : this.renderStakes()}
-        {stakes ? (
+
+        <div className='staked-nodes-header'>
+          <div className='title'>{'Staked Nodes'}</div>
           <div
-            className='link'
+            className='primary-btn'
+            onClick={() => dispatch(push('/nodelist'))}
           >
-            {'View all consensus nodes >'}
+            {'Create Stake'}
           </div>
-        ) : ''}
+        </div>
+
+        {!stakes ? this.renderEmpty() : this.renderStakes()}
+
+        <div
+          className='link'
+          onClick={() => dispatch(push('/nodelist'))}
+        >
+          {'View all consensus nodes >'}
+        </div>
+
       </div>
     );
   }
@@ -30,16 +43,8 @@ export default class StakedNodes extends React.Component<Props, any> {
   renderEmpty() {
     return (
       <div className='empty-stake'>
-        <div className='empty-text-container'>
-          <div className='shrug row'>{SHRUG}</div>
-          <div className='row'>{'You currently have no ONT staked'}</div>
-          <a href='https://o3.network' className='row link'>{'Learn more about staking Ontology'}</a>
-        </div>
-        <div
-          className='primary-btn'
-        >
-          {'Create Stake'}
-        </div>
+        <div className='shrug row'>{SHRUG}</div>
+        <div className='row'>{'You currently have no ONT staked'}</div>
       </div>
     );
   }

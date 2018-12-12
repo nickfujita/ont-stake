@@ -1,0 +1,119 @@
+.node-list {
+  padding: 2rem;
+
+  .legend {
+    display: flex;
+    padding-top: 1.5rem;
+    padding-bottom: 1rem;
+
+    .instruction {
+      flex: 1;
+      padding-left: 0.75rem;
+
+      &::before{
+        content: '';
+        display: inline-block;
+        width: 0.3rem;
+        height: 1rem;
+        transform: translate(-0.5rem, 0.1rem);
+        background-color: lightgreen;
+      }
+    }
+
+    .legend-items {
+      display: flex;
+      font-size: 0.875rem;
+
+      .legend-item {
+        margin-left: 2.5rem;
+
+        &::before{
+          content: '';
+          display: inline-block;
+          width: 0.75rem;
+          height: 0.75rem;
+          border-radius: 0.375rem;
+          transform: translate(-0.375rem, 0.1rem);
+        }
+
+        &.purple::before {
+          background-color: purple;
+        }
+
+        &.blue::before {
+          background-color: lightblue;
+        }
+
+        &.green::before {
+          background-color: lightgreen;
+        }
+
+        &.grey::before {
+          background-color: grey;
+        }
+      }
+    }
+  }
+
+  .table-header,
+  .odd-row {
+    background-color: lightcyan;
+  }
+
+  .table-header {
+    display: flex;
+    padding: 0.5rem 1.25rem;
+  }
+
+  .table {
+    .order {
+      flex: 5%;
+    }
+
+    .name {
+      flex: 35%;
+    }
+
+    .rewards {
+      flex: 15%;
+    }
+
+    .current-stake {
+      flex: 30%;
+    }
+
+    .distribution {
+      flex: 25%;
+    }
+  }
+
+  .table-item {
+    display: flex;
+    align-items: center;
+    padding: 1.25rem;
+    font-weight: 500;
+
+    .distribution {
+      border-radius: 1rem;
+      overflow: hidden;
+      height: 0.5rem;
+      display: flex;
+
+      .purple {
+        background-color: purple;
+      }
+
+      .blue {
+        background-color: lightblue;
+      }
+
+      .green {
+        background-color: lightgreen;
+      }
+
+      .grey {
+        background-color: grey;
+      }
+    }
+  }
+}

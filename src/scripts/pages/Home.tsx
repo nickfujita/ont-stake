@@ -63,13 +63,14 @@ class Home extends React.Component<any, any> {
   }
 
   renderRight() {
-    const { dapi, account } = this.props;
+    const { dapi, account, dispatch } = this.props;
     const { nodeList } = dapi;
     const { stakes } = account;
 
     return (
       <div className='right-side'>
         <StakedNodes
+          dispatch={dispatch}
           nodeList={nodeList}
           stakes={stakes}
         />
