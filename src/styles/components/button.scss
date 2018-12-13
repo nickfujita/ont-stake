@@ -8,4 +8,9 @@
   align-items: center;
   justify-content: center;
   display: flex;
+
+  &.disabled {
+    background-color: lightgrey;
+    cursor: auto;
+  }
 }

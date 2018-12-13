@@ -154,8 +154,15 @@ export function getStakes(address: string) {
       .then(data => data.nodes);
     }
 
+    let consensusNodeData;
+    let consensusNodes;
+    let candidateNodes;
     promise.then(nodeList => {
-      return Promise.all(nodeList.map(({publicKey}) => {
+
+      consensusNodes = nodeList.filter(({isConsensusNode}) => isConsensusNode);
+      candidateNodes = nodeList.filter(({isConsensusNode}) => !isConsensusNode);
+
+      return Promise.all(consensusNodes.map(({publicKey}) => {
         return o3dapi.ONT.stake.getNodeStakeInfo({
           network: 'MainNet',
           address,
@@ -163,7 +170,27 @@ export function getStakes(address: string) {
         });
       }));
     })
-    .then(data => data.filter(({
+    .then(data => {
+      consensusNodeData = data;
+      dispatch(cookStakes(address, data));
+      return Promise.all(candidateNodes.map(({publicKey}) => {
+        return o3dapi.ONT.stake.getNodeStakeInfo({
+          network: 'MainNet',
+          address,
+          nodePublicKey: publicKey,
+        });
+      }));
+    })
+    .then(data => {
+      dispatch(cookStakes(address, [...consensusNodeData, ...data]));
+    })
+    .catch(err => {});
+  };
+}
+
+function cookStakes(address, data) {
+  return dispatch => {
+    const filteredData = data.filter(({
       activeStake,
       pendingStake,
       pendingWithdrawStake,
@@ -173,14 +200,37 @@ export function getStakes(address: string) {
       pendingStake > 0 ||
       pendingWithdrawStake > 0 ||
       withdrawableStake > 0
-    )))
-    .then(data => data.reduce((accum, item: any) => {
+    ));
+
+    const dataMap = filteredData.reduce((accum, item: any) => {
       accum[item.publicKey] = item;
       return accum;
-    }, {}))
-    .then(data => {
-      dispatch(putCache(`${address}_stakes`, data));
+    }, {});
+
+    dispatch(putCache(`${address}_stakes`, dataMap));
+  };
+}
+
+export function claimRewards() {
+  return dispatch => {
+    o3dapi.ONT.stake.claimStakedOngRewards({
+      network: 'MainNet',
     })
-    .catch(err => {});
+    .then(({nodeUrl, txid}) => {
+      console.log('claimRewards success!', nodeUrl, txid);
+    })
+    .catch(() => {});
+  };
+}
+
+export function claimOng() {
+  return dispatch => {
+    o3dapi.ONT.stake.claimStakedOng({
+      network: 'MainNet',
+    })
+    .then(({nodeUrl, txid}) => {
+      console.log('claimOng success!', nodeUrl, txid);
+    })
+    .catch(() => {});
   };
 }

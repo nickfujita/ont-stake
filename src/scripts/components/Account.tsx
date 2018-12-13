@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { shortAddr } from '../utils/account';
 import { disconnect } from '../actions/dapi';
+import { numberWithCommas } from '../utils/numbers';
 
 interface Props {
   address: string;
@@ -17,7 +18,7 @@ export default class Account extends React.Component<Props, any> {
     return (
       <div className='account'>
         <div className='address'>{`${label} (${shortAddr(address)})`}</div>
-        <div className='amount'>{`${ontBalance || 0} ONT available`}</div>
+        <div className='amount'>{`${numberWithCommas(ontBalance || 0)} ONT available`}</div>
         {canDisconnect ? (
           <div
             className='disconnect'

@@ -45,7 +45,7 @@ class Home extends React.Component<any, any> {
   }
 
   renderLeft() {
-    const { stakeRoundInfo, account, cache } = this.props;
+    const { stakeRoundInfo, account, cache, dispatch } = this.props;
     const totalStake = getCache(cache, account, 'total_stake');
     const rewards = getCache(cache, account, 'rewards');
     const unclaimed = getCache(cache, account, 'unclaimed');
@@ -57,6 +57,7 @@ class Home extends React.Component<any, any> {
           totalStake={totalStake.amount}
           rewards={rewards.amount}
           unclaimed={unclaimed.amount}
+          dispatch={dispatch}
         />
       </div>
     );

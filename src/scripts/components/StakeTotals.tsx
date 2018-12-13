@@ -1,11 +1,13 @@
 import * as React from 'react';
 import ClassNames from 'classnames';
 import Help from './Help';
+import { claimRewards, claimOng } from '../actions/dapi';
 
 interface Props {
   totalStake: number;
   rewards: number;
   unclaimed: number;
+  dispatch: any;
 }
 
 export default class StakeTotals extends React.Component<Props, any> {
@@ -32,25 +34,31 @@ export default class StakeTotals extends React.Component<Props, any> {
   }
 
   renderClaims() {
-    const { rewards, unclaimed } = this.props;
-
+    const { rewards, unclaimed, dispatch } = this.props;
+    debugger;
     return (
       <div className='claims'>
-        <div className={ClassNames('row', {'empty': !rewards})}>
+        <div className='row'>
           <div className='text-container'>
             <div className='description'>{'Profits'}</div>
             <div className='row'>{`${rewards || '0'} ONG`}</div>
           </div>
-          <div className='primary-btn'>
+          <div
+            className={ClassNames('primary-btn', {'disabled': !rewards})}
+            onClick={() => rewards && dispatch(claimRewards())}
+          >
             {'Redeem'}
           </div>
         </div>
-        <div className={ClassNames('row', {'empty': !unclaimed})}>
+        <div className='row'>
           <div className='text-container'>
             <div className='description'>{'Unbound ONG'}</div>
             <div className='row'>{`${unclaimed || '0'} ONG`}</div>
           </div>
-          <div className='primary-btn'>
+          <div
+            className={ClassNames('primary-btn', {'disabled': !unclaimed})}
+            onClick={() => unclaimed && dispatch(claimOng())}
+          >
             {'Claim'}
           </div>
         </div>
