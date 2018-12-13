@@ -1,5 +1,6 @@
 import * as React from 'react';
 import ClassNames from 'classnames';
+import Help from './Help';
 
 interface Props {
   totalStake: number;
@@ -14,7 +15,7 @@ export default class StakeTotals extends React.Component<Props, any> {
       <div className='stake-totals-container'>
         {this.renderTotalStake()}
         {this.renderClaims()}
-        {this.renderHelp()}
+        <Help/>
       </div>
     );
   }
@@ -53,16 +54,6 @@ export default class StakeTotals extends React.Component<Props, any> {
             {'Claim'}
           </div>
         </div>
-      </div>
-    );
-  }
-
-  renderHelp() {
-    return (
-      <div className='help'>
-        {'Please read the '}
-        <a href='https://o3.network' className='link'>{'help documents '}</a>
-        {'for more information'}
       </div>
     );
   }

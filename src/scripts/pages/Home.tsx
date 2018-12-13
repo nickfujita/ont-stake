@@ -1,19 +1,14 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import * as dapi from '../actions/dapi';
 import HeaderTitle from '../components/HeaderTitle';
 import Connect from '../components/Connect';
 import Account from '../components/Account';
 import NextRound from '../components/NextRound';
 import StakeTotals from '../components/StakeTotals';
 import StakedNodes from '../components/StakedNodes';
+import { getCache } from '../utils/cache';
 
 class Home extends React.Component<any, any> {
-
-  constructor(props, state) {
-    super(props, state);
-    props.dispatch(dapi.init());
-  }
 
   render() {
     return (
@@ -28,16 +23,19 @@ class Home extends React.Component<any, any> {
   }
 
   renderHeader() {
-    const { account, dispatch } = this.props;
-    const { details, balances } = account;
+    const { dispatch, account, cache } = this.props;
+    const address = account && account.address;
+    const label = account && account.label;
+    const balances = getCache(cache, account, 'balances');
+
     return (
       <div className='header'>
         <HeaderTitle/>
-        {!details ? <Connect dispatch={dispatch} /> : (
+        {!address ? <Connect dispatch={dispatch} /> : (
           <Account
-            address={details.address}
-            label={details.label}
-            ontBalance={balances && balances.ont}
+            address={address}
+            label={label}
+            ontBalance={balances.ont}
             canDisconnect={true}
             dispatch={dispatch}
           />
@@ -47,25 +45,26 @@ class Home extends React.Component<any, any> {
   }
 
   renderLeft() {
-    const { dapi, account } = this.props;
-    const { stakeRoundInfo } = dapi;
-    const { totalStake, rewards, unclaimed } = account;
+    const { stakeRoundInfo, account, cache } = this.props;
+    const totalStake = getCache(cache, account, 'total_stake');
+    const rewards = getCache(cache, account, 'rewards');
+    const unclaimed = getCache(cache, account, 'unclaimed');
+
     return (
       <div className='left-side'>
         <NextRound remainingBlocks={stakeRoundInfo && stakeRoundInfo.remainingBlocks}/>
         <StakeTotals
-          totalStake={totalStake && totalStake.amount}
-          rewards={rewards && rewards.amount}
-          unclaimed={unclaimed && unclaimed.amount}
+          totalStake={totalStake.amount}
+          rewards={rewards.amount}
+          unclaimed={unclaimed.amount}
         />
       </div>
     );
   }
 
   renderRight() {
-    const { dapi, account, dispatch } = this.props;
-    const { nodeList } = dapi;
-    const { stakes } = account;
+    const { nodeList, account, cache, dispatch } = this.props;
+    const stakes = getCache(cache, account, 'stakes');
 
     return (
       <div className='right-side'>

@@ -4,12 +4,13 @@ import ClassNames from 'classnames';
 interface Props {
   node: any;
   stake: any;
+  onClick: any;
 }
 
 export default class StakeTotals extends React.Component<Props, any> {
 
   render() {
-    const { node, stake } = this.props;
+    const { node, stake, onClick } = this.props;
     const { name, userRewardsAllocation } = node;
     const {
       activeStake,
@@ -30,7 +31,10 @@ export default class StakeTotals extends React.Component<Props, any> {
     }
 
     return (
-      <div className='stake-card'>
+      <div
+        className='stake-card'
+        onClick={onClick}
+      >
 
         <div className='flex-grow-container'>
           <div className='name'>{name}</div>

@@ -4,16 +4,12 @@ import {
   DISCONNECT,
   RESET,
   UPDATE_STAKE_ROUND_INFO,
-  UPDATE_ACCOUNT_BALANCE,
-  UPDATE_ACCOUNT_TOTAL_STAKE,
-  UPDATE_ACCOUNT_STAKE_REWARDS,
-  UPDATE_ACCOUNT_UNCLAIMED,
   UPDATE_NODE_LIST,
-  UPDATE_ACCOUNT_STAKES,
 } from '../constants/actions';
 import o3dapi from 'o3-dapi-core';
 import o3dapiOnt from 'o3-dapi-ont';
 import { replace } from 'react-router-redux';
+import { putCache } from './cache';
 
 export function init() {
   return dispatch => {
@@ -103,10 +99,7 @@ export function getBalances(address: string) {
       address,
     })
     .then(data => {
-      dispatch({
-        type: UPDATE_ACCOUNT_BALANCE,
-        data,
-      });
+      dispatch(putCache(`${address}_balances`, data));
     })
     .catch(() => {});
   };
@@ -119,10 +112,7 @@ export function getTotalStake(address: string) {
       address,
     })
     .then(data => {
-      dispatch({
-        type: UPDATE_ACCOUNT_TOTAL_STAKE,
-        data,
-      });
+      dispatch(putCache(`${address}_total_stake`, data));
     })
     .catch(() => {});
   };
@@ -135,10 +125,7 @@ export function getRewards(address: string) {
       address,
     })
     .then(data => {
-      dispatch({
-        type: UPDATE_ACCOUNT_STAKE_REWARDS,
-        data,
-      });
+      dispatch(putCache(`${address}_rewards`, data));
     })
     .catch(() => {});
   };
@@ -151,10 +138,7 @@ export function getUnclaimed(address: string) {
       address,
     })
     .then(data => {
-      dispatch({
-        type: UPDATE_ACCOUNT_UNCLAIMED,
-        data,
-      });
+      dispatch(putCache(`${address}_unclaimed`, data));
     })
     .catch(() => {});
   };
@@ -162,8 +146,7 @@ export function getUnclaimed(address: string) {
 
 export function getStakes(address: string) {
   return (dispatch, getState) => {
-    const { dapi } = getState();
-    const { nodeList } = dapi;
+    const { nodeList } = getState();
 
     let promise = Promise.resolve(nodeList);
     if (!nodeList) {
@@ -196,13 +179,8 @@ export function getStakes(address: string) {
       return accum;
     }, {}))
     .then(data => {
-      dispatch({
-        type: UPDATE_ACCOUNT_STAKES,
-        data,
-      });
+      dispatch(putCache(`${address}_stakes`, data));
     })
-    .catch(err => {
-      debugger;
-    });
+    .catch(err => {});
   };
 }

@@ -50,7 +50,7 @@ export default class StakedNodes extends React.Component<Props, any> {
   }
 
   renderStakes() {
-    const { stakes, nodeList } = this.props;
+    const { stakes, nodeList, dispatch } = this.props;
 
     const nodes = nodeList.reduce((accum, node) => {
       const stake = stakes[node.publicKey];
@@ -70,6 +70,7 @@ export default class StakedNodes extends React.Component<Props, any> {
             key={node.publicKey + index}
             node={node}
             stake={stake}
+            onClick={() => dispatch(push(`/node/${node.publicKey}`))}
           />
         ))}
       </div>

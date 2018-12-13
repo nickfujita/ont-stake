@@ -1,12 +1,18 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
+import { push } from 'react-router-redux';
 import ClassNames from 'classnames';
-import { numberWithCommas } from '../utils/numbers';
+import { numberWithCommas, formatPercent } from '../utils/numbers';
+import StakeDistroBar from '../components/StakeDistroBar';
+import { getCache } from '../utils/cache';
+import { getNodeDistro } from '../utils/node';
 
 interface Props {
   nodeList: any[];
-  userStakes: any;
+  account: any;
+  cache: any;
   router: any;
+  dispatch: any;
 }
 
 class NodeList extends React.Component<Props, any> {
@@ -46,45 +52,57 @@ class NodeList extends React.Component<Props, any> {
   }
 
   renderTable() {
-    const { nodeList, userStakes } = this.props;
+    const { nodeList, account, cache, dispatch } = this.props;
+    const userStakes = getCache(cache, account, 'stakes');
+
     return (
       <div className='table'>
         {this.renderTableHeader()}
-        {nodeList.map(({
-          name,
-          userRewardsAllocation,
-          maxStake,
-          totalStake,
-          ownerStake,
-          usersStake,
-          publicKey,
-        }, index) => {
-          const userStake = userStakes && userStakes[publicKey];
-          const userActiveStake = (userStake && userStake.activeStake || 0);
+        {nodeList.map((node, index) => {
+          const {
+            userRewardsAllocation,
+            totalStake,
+            maxStake,
+            ownerPercentage,
+            usersPercentage,
+            activeUserPercentage,
+            openPercentage,
+            name,
+            publicKey,
 
-          const ownerPercentage = ownerStake / maxStake;
-          const usersPercentage = (usersStake - userActiveStake) / maxStake;
-          const activeUserPercentage = userActiveStake / maxStake;
-          const openPercentage = 1 - (totalStake / maxStake);
+            activeUserStake,
+            activeUserPendingStake,
+          } = getNodeDistro(node, userStakes);
+
+          const totalActiveUserStake = activeUserStake + activeUserPendingStake;
 
           return (
             <div
               key={'node' + index}
               className={ClassNames('table-item', {
                 'even-row': index % 2 === 0,
-                'odd-row': index % 2 !== 0
+                'odd-row': index % 2 !== 0,
               })}
+              onClick={() => dispatch(push(`/node/${publicKey}`))}
             >
               <div className='order'>{index + 1}</div>
               <div className='name'>{name}</div>
-              <div className='rewards'>{userRewardsAllocation}</div>
-              <div className='current-stake'>{`${numberWithCommas(totalStake)} / ${numberWithCommas(maxStake)} ONT`}</div>
-              <div className='distribution'>
-                <div className='purple' style={{flex: `${ownerPercentage * 100}%`}}/>
-                <div className='blue' style={{flex: `${usersPercentage * 100}%`}}/>
-                <div className='green' style={{flex: `${activeUserPercentage * 100}%`}}/>
-                <div className='grey' style={{flex: `${openPercentage * 100}%`}}/>
+              <div className='rewards'>{formatPercent(userRewardsAllocation)}</div>
+              <div className='current-stake'>
+                {numberWithCommas(totalStake)}
+                {totalActiveUserStake ? [
+                  <div key='1'>{'\xa0(\xa0'}</div>,
+                  <div key='2' className='my-stake'>{numberWithCommas(totalActiveUserStake)}</div>,
+                  <div key='3'>{'\xa0)'}</div>,
+                ] : ''}
               </div>
+              <StakeDistroBar
+                className='distribution'
+                ownerPercentage={ownerPercentage}
+                usersPercentage={usersPercentage}
+                activeUserPercentage={activeUserPercentage}
+                openPercentage={openPercentage}
+              />
             </div>
           );
         })}
@@ -107,8 +125,9 @@ class NodeList extends React.Component<Props, any> {
 
 function mapStateToProps(state) {
   return {
-    nodeList: state.dapi.nodeList,
-    userStakes: state.account.stakes,
+    nodeList: state.nodeList,
+    account: state.account,
+    cache: state.cache,
   };
 }
 

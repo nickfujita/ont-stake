@@ -57,7 +57,7 @@
 
   .table-header,
   .odd-row {
-    background-color: lightcyan;
+    background-color: aliceblue;
   }
 
   .table-header {
@@ -80,6 +80,23 @@
 
     .current-stake {
       flex: 30%;
+      display: flex;
+      margin-right: 0.5rem;
+
+      .my-stake {
+        color: lightgreen;
+        padding-left: 0.5rem;
+
+        &::before{
+          content: '';
+          display: inline-block;
+          width: 0.75rem;
+          height: 0.75rem;
+          border-radius: 0.375rem;
+          transform: translateX(-0.375rem);
+          background-color: lightgreen;
+        }
+      }
     }
 
     .distribution {
@@ -88,32 +105,10 @@
   }
 
   .table-item {
+    cursor: pointer;
     display: flex;
     align-items: center;
     padding: 1.25rem;
     font-weight: 500;
-
-    .distribution {
-      border-radius: 1rem;
-      overflow: hidden;
-      height: 0.5rem;
-      display: flex;
-
-      .purple {
-        background-color: purple;
-      }
-
-      .blue {
-        background-color: lightblue;
-      }
-
-      .green {
-        background-color: lightgreen;
-      }
-
-      .grey {
-        background-color: grey;
-      }
-    }
   }
 }
