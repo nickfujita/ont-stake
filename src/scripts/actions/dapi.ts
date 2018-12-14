@@ -267,3 +267,37 @@ export function claimOng() {
     .catch(() => {});
   };
 }
+
+export function addStake(publicKey, amount) {
+  return (dispatch, getState) => {
+    const { account } = getState();
+    o3dapi.ONT.stake.addStake({
+      network: 'MainNet',
+      publicKey,
+      amount,
+    })
+    .then(() => {
+      const id = Date.now();
+      dispatch(addNotification(
+        id,
+        'Stake submitted',
+        `${amount} ONT has been submitted for staking, it will be moved to pending deposit shortly.`,
+      ));
+
+      setTimeout(() => {
+        dispatch(removeNotification(id));
+      }, 4500);
+
+      setTimeout(() => {
+        if (account) {
+          dispatch(updateStakeRoundInfo());
+          dispatch(updateNodeList());
+          dispatch(getBalances(account.address));
+          dispatch(getTotalStake(account.address));
+          dispatch(getStakes(account.address));
+        }
+      }, 90000);
+    })
+    .catch(() => {});
+  };
+}

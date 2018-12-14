@@ -1,0 +1,38 @@
+.custom-slider {
+  font-size: 0.75rem;
+  color: grey;
+  height: 4rem;
+
+  .slider {
+    width: 100%;
+    -webkit-appearance: none;
+    height: 5px;
+    cursor: pointer;
+    border-radius: 1rem;
+    background-color: lightgrey;
+    margin-bottom: 0.75rem;
+
+    &:focus {
+      outline: none;
+    }
+
+    &::-webkit-slider-thumb {
+      -webkit-appearance: none !important;
+      background-color: grey;
+      height: 1.25rem;
+      width: 1.25rem;
+      border: 0.25rem solid lightgreen;
+      border-radius: 1rem;
+    }
+  }
+
+  .flex-container {
+    display: flex;
+    padding-left:  0.6rem;
+    padding-right: 0.25rem;
+
+    .flex-grow-container {
+      flex: 1;
+    }
+  }
+}

@@ -10,6 +10,7 @@ import NextRound from '../components/NextRound';
 import Help from '../components/Help';
 import Connect from '../components/Connect';
 import ClassNames from 'classnames';
+import StakeModal from '../components/StakeModal';
 
 interface Props {
   nodeDetails: any;
@@ -22,12 +23,24 @@ interface Props {
   params: any;
 }
 
-class NodeDetails extends React.Component<Props, any> {
+interface State {
+  isStaking: boolean;
+}
+
+const initialState = {
+  isStaking: false,
+};
+
+class NodeDetails extends React.Component<Props, State> {
+
+  state = initialState;
 
   render() {
-    const { nodeList, cache, account, stakeRoundInfo, params } = this.props;
+    const { nodeList, cache, account, stakeRoundInfo, params, dispatch } = this.props;
+    const { isStaking } = this.state;
     const { publicKey } = params;
     const userStakes = getCache(cache, account, 'stakes');
+    const balances = getCache(cache, account, 'balances');
     const userStake = userStakes && userStakes[publicKey];
     const {details = {}, index = 0} = nodeList.reduce((accum, node, index) => {
       if (accum.details) {
@@ -61,6 +74,17 @@ class NodeDetails extends React.Component<Props, any> {
           {this.renderUserStake({userStake})}
         </div>
 
+        {isStaking ? (
+          <StakeModal
+            nodeName={node && node.name}
+            nodePublicKey={node && node.publicKey}
+            account={account}
+            balance={balances.ont}
+            maxStake={node.maxStake - node.totalStake}
+            onClose={() => this.setState({isStaking: false})}
+            dispatch={dispatch}
+          />
+        ) : ''}
       </div>
     );
   }
@@ -204,7 +228,12 @@ class NodeDetails extends React.Component<Props, any> {
             <div className='section-description'>{'Your contribution'}</div>
             <div className='focus-text'>{`${activeStake + pendingStake} ONT`}</div>
           </div>
-          <div className='primary-btn stake-ont'>{'STAKE ONT'}</div>
+          <div
+            className='primary-btn stake-ont'
+            onClick={() => this.setState({isStaking: true})}
+          >
+            {'STAKE ONT'}
+          </div>
         </div>
 
         <div className='staked-section'>

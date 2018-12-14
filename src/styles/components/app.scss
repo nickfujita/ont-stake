@@ -1,6 +1,7 @@
 body {
   font-family: 'avenir', 'Lato';
   height: 100vh;
+  margin: 0;
 
   #app {
     height: 100%;
@@ -18,5 +19,13 @@ body {
     color: #2291f3;
     font-weight: 500;
     cursor: pointer;
+  }
+
+  .flex-container {
+    display: flex;
+
+    .flex-grow-container {
+      flex: 1;
+    }
   }
 }

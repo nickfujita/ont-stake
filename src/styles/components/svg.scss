@@ -23,3 +23,13 @@
   height: 1rem;
   width: 1rem;
 }
+
+.logo-times {
+  background-color: grey;
+  -webkit-mask: url('../assets/times.svg') no-repeat 50% 50%;
+  -webkit-mask-size: contain;
+  mask: url('../assets/times.svg') no-repeat 50% 50%;
+  mask-size: contain;
+  height: 1rem;
+  width: 1rem;
+}
