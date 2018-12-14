@@ -5,6 +5,7 @@ import account from './components/account';
 import networks from './components/networks';
 import nodeList from './components/nodeList';
 import cache from './components/cache';
+import notifications from './components/notifications';
 
 const rootReducer = combineReducers({
   routing: routerReducer,
@@ -13,6 +14,7 @@ const rootReducer = combineReducers({
   stakeRoundInfo,
   nodeList,
   cache,
+  notifications,
 });
 
 export default rootReducer;

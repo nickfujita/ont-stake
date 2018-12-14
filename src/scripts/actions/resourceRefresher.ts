@@ -58,5 +58,5 @@ export function executeCalls() {
 
 export function clearCalls() {
   queue = {};
-  interval && clearTimeout(interval)
+  interval && clearTimeout(interval);
 }

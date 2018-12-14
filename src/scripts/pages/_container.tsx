@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import * as dapi from '../actions/dapi';
+import Notification from '../components/Notification';
 
 class Container extends React.Component<any, any> {
 
@@ -10,9 +11,25 @@ class Container extends React.Component<any, any> {
   }
 
   render() {
+    const {
+      children,
+      dispatch,
+      notifications,
+    } = this.props;
     return (
       <div className='app_content'>
-        {this.props.children}
+        {children}
+        <div className='notifications-container'>
+          {notifications.map(({id, title, description}) => (
+            <Notification
+              key={'notification' + id}
+              dispatch={dispatch}
+              title={title}
+              description={description}
+              id={id}
+            />
+          ))}
+        </div>
       </div>
     );
   }

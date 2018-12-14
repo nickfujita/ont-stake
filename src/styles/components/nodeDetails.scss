@@ -101,6 +101,15 @@
       .description {
         font-size: 0.75rem;
       }
+
+      .disabled {
+        color: lightgrey;
+
+        .primary-btn {
+          color: white;
+          background-color: lightgrey;
+        }
+      }
     }
   }
 }

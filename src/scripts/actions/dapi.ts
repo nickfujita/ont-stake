@@ -10,6 +10,8 @@ import o3dapi from 'o3-dapi-core';
 import o3dapiOnt from 'o3-dapi-ont';
 import { replace } from 'react-router-redux';
 import { putCache } from './cache';
+import { addNotification, removeNotification } from './notifications';
+import { getCache } from '../utils/cache';
 
 export function init() {
   return dispatch => {
@@ -212,24 +214,55 @@ function cookStakes(address, data) {
 }
 
 export function claimRewards() {
-  return dispatch => {
+  return (dispatch, getState) => {
+    const { account, cache } = getState();
+    const rewardAmount = getCache(cache, account, 'rewards').amount;
     o3dapi.ONT.stake.claimStakedOngRewards({
       network: 'MainNet',
     })
-    .then(({nodeUrl, txid}) => {
-      console.log('claimRewards success!', nodeUrl, txid);
+    .then(() => {
+      const id = Date.now();
+
+      dispatch(addNotification(
+        id,
+        'Profits redeemed',
+        `${rewardAmount} ONG has been sent to your wallet address. It will arrive shortly`,
+      ));
+
+      setTimeout(() => {
+        dispatch(removeNotification(id));
+      }, 4500);
+
+      setTimeout(() => {
+        account && dispatch(getRewards(account.address));
+      }, 90000);
     })
     .catch(() => {});
   };
 }
 
 export function claimOng() {
-  return dispatch => {
+  return (dispatch, getState) => {
+    const { account, cache } = getState();
+    const unclaimedAmount = getCache(cache, account, 'unclaimed').amount;
     o3dapi.ONT.stake.claimStakedOng({
       network: 'MainNet',
     })
-    .then(({nodeUrl, txid}) => {
-      console.log('claimOng success!', nodeUrl, txid);
+    .then(() => {
+      const id = Date.now();
+      dispatch(addNotification(
+        id,
+        'Profits redeemed',
+        `${unclaimedAmount} ONG has been sent to your wallet address. It will arrive shortly`,
+      ));
+
+      setTimeout(() => {
+        dispatch(removeNotification(id));
+      }, 4500);
+
+      setTimeout(() => {
+        account && dispatch(getUnclaimed(account.address));
+      }, 90000);
     })
     .catch(() => {});
   };

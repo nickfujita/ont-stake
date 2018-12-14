@@ -10,7 +10,34 @@ interface Props {
   dispatch: any;
 }
 
-export default class StakeTotals extends React.Component<Props, any> {
+interface State {
+  isClaimingOng: boolean;
+  isClaimingRewards: boolean;
+}
+
+const initialState = {
+  isClaimingOng: false,
+  isClaimingRewards: false,
+};
+
+export default class StakeTotals extends React.Component<Props, State> {
+
+  state = initialState;
+
+  componentWillUpdate(nextProps) {
+    const {
+      isClaimingOng,
+      isClaimingRewards,
+    } = this.state;
+
+    if (isClaimingOng && nextProps.unclaimed !== this.props.unclaimed) {
+      this.setState({isClaimingOng: false});
+    }
+
+    if (isClaimingRewards && nextProps.rewards !== this.props.rewards) {
+      this.setState({isClaimingRewards: false});
+    }
+  }
 
   render() {
     return (
@@ -35,17 +62,31 @@ export default class StakeTotals extends React.Component<Props, any> {
 
   renderClaims() {
     const { rewards, unclaimed, dispatch } = this.props;
-    debugger;
+    const {
+      isClaimingOng,
+      isClaimingRewards,
+    } = this.state;
+
+    const parsedRewards = Number(rewards);
+    const parsedUnclaimed = Number(unclaimed);
+
     return (
       <div className='claims'>
         <div className='row'>
           <div className='text-container'>
             <div className='description'>{'Profits'}</div>
-            <div className='row'>{`${rewards || '0'} ONG`}</div>
+            <div className='row'>{`${isClaimingRewards || !parsedRewards ? '0' : rewards} ONG`}</div>
           </div>
           <div
-            className={ClassNames('primary-btn', {'disabled': !rewards})}
-            onClick={() => rewards && dispatch(claimRewards())}
+            className={ClassNames('primary-btn', {
+              'disabled': !parsedRewards || isClaimingRewards,
+            })}
+            onClick={() => {
+              if (!isClaimingRewards && parsedRewards) {
+                dispatch(claimRewards());
+                this.setState({isClaimingRewards: true});
+              }
+            }}
           >
             {'Redeem'}
           </div>
@@ -53,11 +94,18 @@ export default class StakeTotals extends React.Component<Props, any> {
         <div className='row'>
           <div className='text-container'>
             <div className='description'>{'Unbound ONG'}</div>
-            <div className='row'>{`${unclaimed || '0'} ONG`}</div>
+            <div className='row'>{`${isClaimingOng || !parsedUnclaimed ? '0' : unclaimed} ONG`}</div>
           </div>
           <div
-            className={ClassNames('primary-btn', {'disabled': !unclaimed})}
-            onClick={() => unclaimed && dispatch(claimOng())}
+            className={ClassNames('primary-btn', {
+              'disabled': !parsedUnclaimed || isClaimingOng,
+            })}
+            onClick={() => {
+              if (!isClaimingOng && parsedUnclaimed) {
+                dispatch(claimOng());
+                this.setState({isClaimingOng: true});
+              }
+            }}
           >
             {'Claim'}
           </div>

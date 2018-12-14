@@ -9,6 +9,7 @@ import StakeDistroPortion from '../components/StakeDistroPortion';
 import NextRound from '../components/NextRound';
 import Help from '../components/Help';
 import Connect from '../components/Connect';
+import ClassNames from 'classnames';
 
 interface Props {
   nodeDetails: any;
@@ -207,7 +208,7 @@ class NodeDetails extends React.Component<Props, any> {
         </div>
 
         <div className='staked-section'>
-          <div className='flex-container row'>
+          <div className={ClassNames('flex-container row', {'disabled': activeStake === 0})}>
             <div className='flex-grow-container'>
               <div className='bold-text'>{'Active'}</div>
               <div className='description'>{'Actively staked in the current round and generating rewards.'}</div>
@@ -215,7 +216,7 @@ class NodeDetails extends React.Component<Props, any> {
             <div className='bold-text'>{`${activeStake} ONT`}</div>
           </div>
 
-          <div className='flex-container row'>
+          <div className={ClassNames('flex-container row', {'disabled': pendingStake === 0})}>
             <div className='flex-grow-container'>
               <div className='bold-text'>{'Pending deposit'}</div>
               <div className='description'>{'Waiting to be staked at the start of the next round.'}</div>
@@ -223,7 +224,7 @@ class NodeDetails extends React.Component<Props, any> {
             <div className='bold-text'>{`${pendingStake} ONT`}</div>
           </div>
 
-          <div className='flex-container row'>
+          <div className={ClassNames('flex-container row', {'disabled': pendingWithdrawStake === 0})}>
             <div className='flex-grow-container'>
               <div className='bold-text'>{'Pending withdraw'}</div>
               <div className='description'>{'After applying to withdrawl, actively staked ONT will be locked until the end of the current round, will continut to generate rewards until then.'}</div>
@@ -231,11 +232,15 @@ class NodeDetails extends React.Component<Props, any> {
             <div className='bold-text'>{`${pendingWithdrawStake} ONT`}</div>
           </div>
 
-          <div className='request-withdraw-btn primary-btn row'>{'Request withdraw'}</div>
+          <div className={ClassNames('row', {'disabled': activeStake + pendingStake === 0})}>
+            <div className='request-withdraw-btn primary-btn'>
+              {'Request withdraw'}
+            </div>
+          </div>
 
         </div>
 
-        <div>
+        <div className={ClassNames({'disabled': withdrawableStake === 0})}>
           <div className='flex-container row'>
             <div className='flex-grow-container'>
               <div className='bold-text'>{'Withdrawable'}</div>

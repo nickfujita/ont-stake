@@ -11,6 +11,7 @@ import { getCache } from '../utils/cache';
 class Home extends React.Component<any, any> {
 
   render() {
+    const { dispatch } = this.props;
     return (
       <div className='home'>
         {this.renderHeader()}

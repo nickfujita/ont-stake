@@ -1,0 +1,62 @@
+.notifications-container {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 1rem;
+}
+
+.notification {
+  background: aliceblue;
+  padding: 1rem;
+  display: flex;
+  border-left: lightgreen 0.5rem solid;
+  margin-bottom: 1rem;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  position: relative;
+
+  .logo-steak {
+    margin-right: 1rem;
+  }
+
+  .title {
+    font-weight: 600;
+  }
+
+  .description {
+    margin-right: 1.5rem;
+  }
+
+  .close {
+    position: absolute;
+    top: 0.25rem;
+    right: 0.75rem;
+    font-size: 1.25rem;
+    cursor: pointer;
+  }
+
+  animation: slide-in 500ms ease forwards;
+
+  &.leaving {
+    animation: slide-out 500ms ease forwards;
+  }
+}
+
+
+@keyframes slide-in {
+  0% {
+    transform: translateX(50rem);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes slide-out {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
