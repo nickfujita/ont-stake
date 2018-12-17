@@ -54,8 +54,11 @@ export default class StakeTotals extends React.Component<Props, State> {
 
     return (
       <div className='total-stake'>
-        <div className='description'>{'Total in contract:'}</div>
-        <div className='total'>{`${totalStake || '0'} ONT`}</div>
+        <div className='description'>{'TOTAL STAKE'}</div>
+        <div className='total-container'>
+          <div className='total'>{totalStake || '0'}</div>
+          <div>{'ONT'}</div>
+        </div>
       </div>
     );
   }
@@ -74,7 +77,7 @@ export default class StakeTotals extends React.Component<Props, State> {
       <div className='claims'>
         <div className='row'>
           <div className='text-container'>
-            <div className='description'>{'Profits'}</div>
+            <div className='description'>{'STAKE REWARDS'}</div>
             <div className='row'>{`${isClaimingRewards || !parsedRewards ? '0' : rewards} ONG`}</div>
           </div>
           <div
@@ -83,8 +86,10 @@ export default class StakeTotals extends React.Component<Props, State> {
             })}
             onClick={() => {
               if (!isClaimingRewards && parsedRewards) {
-                dispatch(claimRewards());
-                this.setState({isClaimingRewards: true});
+                dispatch(claimRewards())
+                .then(result => {
+                  result && this.setState({isClaimingRewards: true});
+                });
               }
             }}
           >
@@ -93,7 +98,7 @@ export default class StakeTotals extends React.Component<Props, State> {
         </div>
         <div className='row'>
           <div className='text-container'>
-            <div className='description'>{'Unbound ONG'}</div>
+            <div className='description'>{'UNCLAIMED ONG'}</div>
             <div className='row'>{`${isClaimingOng || !parsedUnclaimed ? '0' : unclaimed} ONG`}</div>
           </div>
           <div
@@ -102,8 +107,10 @@ export default class StakeTotals extends React.Component<Props, State> {
             })}
             onClick={() => {
               if (!isClaimingOng && parsedUnclaimed) {
-                dispatch(claimOng());
-                this.setState({isClaimingOng: true});
+                dispatch(claimOng())
+                .then(result => {
+                  result && this.setState({isClaimingOng: true});
+                });
               }
             }}
           >

@@ -97,9 +97,16 @@
       .disabled {
         color: lightgrey;
 
+        &.primary-btn {
+          color: white;
+          background-color: lightgrey;
+          cursor: auto;
+        }
+
         .primary-btn {
           color: white;
           background-color: lightgrey;
+          cursor: auto;
         }
       }
     }

@@ -4,6 +4,7 @@ import CustomSlider from './CustomSlider';
 import { shortAddr } from '../utils/account';
 import { numberWithCommas } from '../utils/numbers';
 import { addStake } from '../actions/dapi';
+import ClassNames from 'classnames';
 
 interface Props {
   onClose?: any;
@@ -86,7 +87,7 @@ export default class StakeModal extends React.Component<Props, State> {
 
         <div className='btn-container'>
           <div
-            className='primary-btn'
+            className={ClassNames('primary-btn', {'disabled': Number(amount) === 0})}
             onClick={() => {
               if (Number(amount) > 0) {
                 dispatch(addStake(nodePublicKey, Number(amount)));

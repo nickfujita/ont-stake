@@ -1,18 +1,12 @@
 .next-round {
-  display: flex;
   font-weight: 500;
   margin-bottom: 1rem;
 
   .description {
-    flex: 1;
+    color: red;
   }
 
-  .values {
-    text-align: right;
-
-    .remaining-blocks {
-      font-size: 0.75rem;
-      color: grey;
-    }
+  .remaining-blocks {
+    font-size: 1.5rem;
   }
 }

@@ -4,6 +4,22 @@
     border-bottom: 1px solid lightgrey;
   }
 
+  .description {
+    font-size: 0.875rem;
+    color: grey;
+  }
+
+  .total-container {
+    display: flex;
+    align-items: flex-end;
+
+    .total {
+      font-size: 1.5rem;
+      margin-right: 0.5rem;
+      line-height: 1.75rem;
+    }
+  }
+
   .claims {
     padding: 1rem 0;
     border-bottom: 1px solid lightgrey;
@@ -12,10 +28,6 @@
       display: flex;
       margin-bottom: 0.5rem;
 
-      .description {
-        font-size: 0.875rem;
-        color: grey;
-      }
 
       .text-container {
         flex: 1;
@@ -37,5 +49,9 @@
 
   .help {
     padding: 1rem 0;
+
+    .row {
+      margin-bottom: 1rem;
+    }
   }
 }

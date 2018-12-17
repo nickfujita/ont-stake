@@ -26,7 +26,27 @@ export function init() {
       });
       dispatch(updateStakeRoundInfo());
       dispatch(updateNodeList());
+      dispatch(connect());
+      dispatch(startDataRefresher());
     });
+  };
+}
+
+function startDataRefresher() {
+  return (dispatch, getState) => {
+    setInterval(() => {
+      dispatch(updateStakeRoundInfo());
+      dispatch(updateNodeList());
+
+      const address = getState().account.address;
+      if (address) {
+        dispatch(getBalances(address));
+        dispatch(getTotalStake(address));
+        dispatch(getRewards(address));
+        dispatch(getUnclaimed(address));
+        dispatch(getStakes(address));
+      }
+    }, 10000);
   };
 }
 
@@ -82,6 +102,7 @@ export function disconnect() {
         type: DISCONNECT,
       });
       dispatch(replace('/'));
+      dispatch(connect());
     })
     .catch(() => {});
   };
@@ -217,27 +238,24 @@ export function claimRewards() {
   return (dispatch, getState) => {
     const { account, cache } = getState();
     const rewardAmount = getCache(cache, account, 'rewards').amount;
-    o3dapi.ONT.stake.claimStakedOngRewards({
+    return o3dapi.ONT.stake.claimStakedOngRewards({
       network: 'MainNet',
     })
     .then(() => {
-      const id = Date.now();
-
       dispatch(addNotification(
-        id,
+        Date.now(),
         'Profits redeemed',
         `${rewardAmount} ONG has been sent to your wallet address. It will arrive shortly`,
+        4500,
       ));
-
-      setTimeout(() => {
-        dispatch(removeNotification(id));
-      }, 4500);
 
       setTimeout(() => {
         account && dispatch(getRewards(account.address));
       }, 90000);
+
+      return true;
     })
-    .catch(() => {});
+    .catch(() => false);
   };
 }
 
@@ -245,48 +263,42 @@ export function claimOng() {
   return (dispatch, getState) => {
     const { account, cache } = getState();
     const unclaimedAmount = getCache(cache, account, 'unclaimed').amount;
-    o3dapi.ONT.stake.claimStakedOng({
+    return o3dapi.ONT.stake.claimStakedOng({
       network: 'MainNet',
     })
     .then(() => {
-      const id = Date.now();
       dispatch(addNotification(
-        id,
+        Date.now(),
         'Profits redeemed',
         `${unclaimedAmount} ONG has been sent to your wallet address. It will arrive shortly`,
+        4500,
       ));
-
-      setTimeout(() => {
-        dispatch(removeNotification(id));
-      }, 4500);
 
       setTimeout(() => {
         account && dispatch(getUnclaimed(account.address));
       }, 90000);
+
+      return true;
     })
-    .catch(() => {});
+    .catch(() => false);
   };
 }
 
-export function addStake(publicKey, amount) {
+export function addStake(nodePublicKey, amount) {
   return (dispatch, getState) => {
     const { account } = getState();
     o3dapi.ONT.stake.addStake({
       network: 'MainNet',
-      publicKey,
+      nodePublicKey,
       amount,
     })
     .then(() => {
-      const id = Date.now();
       dispatch(addNotification(
-        id,
+        Date.now(),
         'Stake submitted',
         `${amount} ONT has been submitted for staking, it will be moved to pending deposit shortly.`,
+        4500,
       ));
-
-      setTimeout(() => {
-        dispatch(removeNotification(id));
-      }, 4500);
 
       setTimeout(() => {
         if (account) {
@@ -299,5 +311,67 @@ export function addStake(publicKey, amount) {
       }, 90000);
     })
     .catch(() => {});
+  };
+}
+
+export function requestStakeWithdraw(nodePublicKey, amount) {
+  return (dispatch, getState) => {
+    const { account } = getState();
+    o3dapi.ONT.stake.requestStakeWithdraw({
+      network: 'MainNet',
+      nodePublicKey,
+      amount,
+    })
+    .then(() => {
+      dispatch(addNotification(
+        Date.now(),
+        'Stake withdraw request submitted',
+        `${amount} ONT has been requested to be withdrawn, it will be withdrawable in the next staking round.`,
+        4500,
+      ));
+
+      setTimeout(() => {
+        if (account) {
+          dispatch(updateStakeRoundInfo());
+          dispatch(updateNodeList());
+          dispatch(getBalances(account.address));
+          dispatch(getTotalStake(account.address));
+          dispatch(getStakes(account.address));
+        }
+      }, 90000);
+    })
+    .catch(() => {});
+  };
+}
+
+export function withdrawStake(nodePublicKey, amount) {
+  return (dispatch, getState) => {
+    const { account } = getState();
+    return o3dapi.ONT.stake.withdrawStake({
+      network: 'MainNet',
+      nodePublicKey,
+      amount,
+    })
+    .then(() => {
+      dispatch(addNotification(
+        Date.now(),
+        'Stake withdraw submitted',
+        `${amount} ONT has been submitted for withdraw, it will be moved to pending deposit shortly.`,
+        4500,
+      ));
+
+      setTimeout(() => {
+        if (account) {
+          dispatch(updateStakeRoundInfo());
+          dispatch(updateNodeList());
+          dispatch(getBalances(account.address));
+          dispatch(getTotalStake(account.address));
+          dispatch(getStakes(account.address));
+        }
+      }, 90000);
+
+      return true;
+    })
+    .catch(() => false);
   };
 }

@@ -11,6 +11,8 @@ import Help from '../components/Help';
 import Connect from '../components/Connect';
 import ClassNames from 'classnames';
 import StakeModal from '../components/StakeModal';
+import WithdrawModal from '../components/WithdrawModal';
+import { withdrawStake } from '../actions/dapi';
 
 interface Props {
   nodeDetails: any;
@@ -25,10 +27,14 @@ interface Props {
 
 interface State {
   isStaking: boolean;
+  isWithdrawing: boolean;
+  hasWithdrawn: boolean;
 }
 
 const initialState = {
   isStaking: false,
+  isWithdrawing: false,
+  hasWithdrawn: false,
 };
 
 class NodeDetails extends React.Component<Props, State> {
@@ -37,7 +43,7 @@ class NodeDetails extends React.Component<Props, State> {
 
   render() {
     const { nodeList, cache, account, stakeRoundInfo, params, dispatch } = this.props;
-    const { isStaking } = this.state;
+    const { isStaking, isWithdrawing } = this.state;
     const { publicKey } = params;
     const userStakes = getCache(cache, account, 'stakes');
     const balances = getCache(cache, account, 'balances');
@@ -71,7 +77,7 @@ class NodeDetails extends React.Component<Props, State> {
             remainingBlocks: stakeRoundInfo && stakeRoundInfo.remainingBlocks,
           })}
 
-          {this.renderUserStake({userStake})}
+          {this.renderUserStake({balances, userStake, nodeDetails: details})}
         </div>
 
         {isStaking ? (
@@ -82,6 +88,15 @@ class NodeDetails extends React.Component<Props, State> {
             balance={balances.ont}
             maxStake={node.maxStake - node.totalStake}
             onClose={() => this.setState({isStaking: false})}
+            dispatch={dispatch}
+          />
+        ) : ''}
+
+        {isWithdrawing ? (
+          <WithdrawModal
+            totalStake={userStake.activeStake + userStake.pendingStake}
+            nodePublicKey={node && node.publicKey}
+            onClose={() => this.setState({isWithdrawing: false})}
             dispatch={dispatch}
           />
         ) : ''}
@@ -212,13 +227,19 @@ class NodeDetails extends React.Component<Props, State> {
     );
   }
 
-  renderUserStake({userStake = {}}: {userStake: any}) {
+  renderUserStake({balances, userStake = {}, nodeDetails}: {balances: any, userStake: any, nodeDetails: any}) {
+    const { dispatch } = this.props;
+    const { hasWithdrawn } = this.state;
     const {
       activeStake = 0,
       pendingStake = 0,
       pendingWithdrawStake = 0,
       withdrawableStake = 0,
     } = userStake;
+
+    const {
+      publicKey,
+    } = nodeDetails;
 
     return (
       <div className='user-stake'>
@@ -229,8 +250,13 @@ class NodeDetails extends React.Component<Props, State> {
             <div className='focus-text'>{`${activeStake + pendingStake} ONT`}</div>
           </div>
           <div
-            className='primary-btn stake-ont'
-            onClick={() => this.setState({isStaking: true})}
+            className={ClassNames('primary-btn stake-ont', {'disabled': !balances.ont || balances.ont < 500})}
+            onClick={() => {
+              if (!balances.ont || balances.ont < 500) {
+                return;
+              }
+              this.setState({isStaking: true});
+            }}
           >
             {'STAKE ONT'}
           </div>
@@ -262,23 +288,43 @@ class NodeDetails extends React.Component<Props, State> {
           </div>
 
           <div className={ClassNames('row', {'disabled': activeStake + pendingStake === 0})}>
-            <div className='request-withdraw-btn primary-btn'>
+            <div
+              className='request-withdraw-btn primary-btn'
+              onClick={() => {
+                if (activeStake + pendingStake !== 0) {
+                  this.setState({isWithdrawing: true});
+                }
+              }}
+            >
               {'Request withdraw'}
             </div>
           </div>
 
         </div>
 
-        <div className={ClassNames({'disabled': withdrawableStake === 0})}>
+        <div className={ClassNames({'disabled': hasWithdrawn || (withdrawableStake === 0)})}>
           <div className='flex-container row'>
             <div className='flex-grow-container'>
               <div className='bold-text'>{'Withdrawable'}</div>
               <div className='description'>{'Not staked and waiting to be withdrawn to your wallet.'}</div>
             </div>
-            <div className='bold-text'>{`${withdrawableStake} ONT`}</div>
+            <div className='bold-text'>{`${hasWithdrawn ? 0 : withdrawableStake} ONT`}</div>
           </div>
 
-          <div className='withdraw-btn primary-btn'>{'Send to wallet'}</div>
+          <div
+            className='withdraw-btn primary-btn'
+            onClick={() => {
+              if (hasWithdrawn || (withdrawableStake === 0)) {
+                return;
+              }
+              dispatch(withdrawStake(publicKey, withdrawableStake))
+              .then(result => {
+                result && this.setState({hasWithdrawn: true});
+              });
+            }}
+          >
+            {'Send to wallet'}
+          </div>
         </div>
 
       </div>

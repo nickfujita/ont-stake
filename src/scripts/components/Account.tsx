@@ -24,7 +24,7 @@ export default class Account extends React.Component<Props, any> {
             className='disconnect'
             onClick={() => dispatch(disconnect())}
           >
-            {'Disconnect Wallet'}
+            {'Swap wallet'}
           </div>
         ) : ''}
       </div>

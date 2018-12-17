@@ -1,10 +1,14 @@
 import * as React from 'react';
 import Modal from './Modal';
 import CustomSlider from './CustomSlider';
+import { requestStakeWithdraw } from '../actions/dapi';
+import ClassNames from 'classnames';
 
 interface Props {
   onClose?: any;
-  activeStake: number;
+  nodePublicKey: string;
+  totalStake: number;
+  dispatch: any;
 }
 
 interface State {
@@ -20,7 +24,7 @@ export default class WithdrawModal extends React.Component<Props, State> {
   state = initialState;
 
   render() {
-    const { onClose, activeStake } = this.props;
+    const { onClose, nodePublicKey, totalStake, dispatch } = this.props;
     const { amount } = this.state;
 
     return (
@@ -43,13 +47,21 @@ export default class WithdrawModal extends React.Component<Props, State> {
         </div>
 
         <CustomSlider
-          max={activeStake.toString()}
+          max={totalStake.toString()}
           step={'500'}
           onChange={amount => this.setState({amount})}
         />
 
         <div className='btn-container'>
-          <div className='primary-btn'>
+          <div
+            className={ClassNames('primary-btn', {'disabled': Number(amount) === 0})}
+            onClick={() => {
+              if (Number(amount) > 0) {
+                dispatch(requestStakeWithdraw(nodePublicKey, Number(amount)));
+                onClose();
+              }
+            }}
+          >
             {'WITHDRAW STAKE'}
           </div>
         </div>
