@@ -1,0 +1,114 @@
+.node-details {
+  padding: 1rem;
+
+  .header {
+    display: flex;
+    align-items: flex-end;
+    margin-bottom: 1.5rem;
+    height: 3rem;
+
+    .link {
+      flex: 1;
+    }
+  }
+
+  .primary-btn {
+    height: 1rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    display: inline-block;
+  }
+
+  .content-container {
+    display: flex;
+
+    .row {
+      margin-bottom: 1rem;
+    }
+
+    .focus-text {
+      font-size: 2rem;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+      height: 2.75rem;
+    }
+
+    .node-info {
+      flex: 33%;
+      margin-right: 3rem;
+
+      .info-header {
+        padding-bottom: 1rem;
+        border-bottom: 1px solid lightgrey;
+        margin-bottom: 1.5rem;
+      }
+
+      .distro-info {
+        padding-bottom: 0.5rem;
+        border-bottom: 1px solid lightgrey;
+        margin-bottom: 1.5rem;
+
+        .stake-distro-bar {
+          height: 1rem;
+          margin-bottom: 0.25rem;
+        }
+
+        .stake-distro-container .flex-container {
+          font-size: 0.875rem;
+        }
+      }
+    }
+
+    .user-stake {
+      flex: 66%;
+
+      .row {
+        margin-bottom: 1.5rem;
+      }
+
+      .section-description {
+        flex: 1;
+        padding-left: 0.75rem;
+
+        &::before{
+          content: '';
+          display: inline-block;
+          width: 0.3rem;
+          height: 1rem;
+          transform: translate(-0.5rem, 0.1rem);
+          background-color: lightgreen;
+        }
+      }
+
+      .staked-section {
+        padding-bottom: 1.5rem;
+        border-bottom: 1px solid lightgrey;
+        margin-bottom: 3rem;
+      }
+
+      .bold-text {
+        font-weight: 600;
+      }
+
+      .description {
+        font-size: 0.75rem;
+      }
+
+      .disabled {
+        color: lightgrey;
+
+        &.primary-btn {
+          color: white;
+          background-color: lightgrey;
+          cursor: auto;
+        }
+
+        .primary-btn {
+          color: white;
+          background-color: lightgrey;
+          cursor: auto;
+        }
+      }
+    }
+  }
+}

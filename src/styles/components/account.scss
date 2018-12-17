@@ -1,0 +1,13 @@
+.account {
+  text-align: right;
+  font-size: 0.875rem;
+
+  .address {
+    font-weight: 600;
+  }
+
+  .disconnect {
+    cursor: pointer;
+    color: red;
+  }
+}

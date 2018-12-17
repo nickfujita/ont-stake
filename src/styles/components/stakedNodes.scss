@@ -1,0 +1,45 @@
+.staked-nodes-container {
+  .title {
+    font-weight: 600;
+  }
+
+  .empty-stake {
+    text-align: center;
+    padding-top: 2rem;
+    font-size: 0.875rem;
+    color: gray;
+
+    .empty-text-container {
+      margin-bottom: 2rem;
+    }
+
+    .row {
+      margin-bottom: 0.5rem;
+    }
+
+    .shrug {
+      font-size: 1.25rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .primary-btn {
+      width: 6rem;
+      margin: auto;
+    }
+  }
+
+  .link {
+    text-align: center;
+    margin-top: 1.5rem;
+    font-size: 0.875rem;
+  }
+
+  .staked-nodes-header {
+    display: flex;
+    align-items: center;
+
+    .title {
+      flex: 1;
+    }
+  }
+}

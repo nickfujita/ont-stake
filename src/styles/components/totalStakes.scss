@@ -1,0 +1,57 @@
+.stake-totals-container {
+  .total-stake {
+    padding: 1rem 0;
+    border-bottom: 1px solid lightgrey;
+  }
+
+  .description {
+    font-size: 0.875rem;
+    color: grey;
+  }
+
+  .total-container {
+    display: flex;
+    align-items: flex-end;
+
+    .total {
+      font-size: 1.5rem;
+      margin-right: 0.5rem;
+      line-height: 1.75rem;
+    }
+  }
+
+  .claims {
+    padding: 1rem 0;
+    border-bottom: 1px solid lightgrey;
+
+    .row {
+      display: flex;
+      margin-bottom: 0.5rem;
+
+
+      .text-container {
+        flex: 1;
+      }
+
+      .primary-btn {
+        width: 5.5rem;
+        height: 1.5rem;
+      }
+
+      &.empty {
+        .primary-btn {
+          background-color: lightgrey;
+          cursor: auto;
+        }
+      }
+    }
+  }
+
+  .help {
+    padding: 1rem 0;
+
+    .row {
+      margin-bottom: 1rem;
+    }
+  }
+}

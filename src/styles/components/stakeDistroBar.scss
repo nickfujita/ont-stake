@@ -1,0 +1,22 @@
+.stake-distro-bar {
+  border-radius: 1rem;
+  overflow: hidden;
+  height: 0.5rem;
+  display: flex;
+
+  .purple {
+    background-color: purple;
+  }
+
+  .blue {
+    background-color: lightblue;
+  }
+
+  .green {
+    background-color: lightgreen;
+  }
+
+  .grey {
+    background-color: grey;
+  }
+}

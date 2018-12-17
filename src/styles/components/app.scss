@@ -1,0 +1,30 @@
+body {
+  font-family: 'avenir', 'Lato';
+  height: 100vh;
+  margin: 0;
+
+  #app {
+    height: 100%;
+    max-width: 1400px;
+    margin: auto;
+
+    .app_content {
+      height: 100%;
+    }
+  }
+
+  .link {
+    text-decoration: none;
+    color: #2291f3;
+    font-weight: 500;
+    cursor: pointer;
+  }
+
+  .flex-container {
+    display: flex;
+
+    .flex-grow-container {
+      flex: 1;
+    }
+  }
+}
