@@ -1,3 +1,4 @@
+declare const DISTRIBUTION: boolean;
 import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import { browserHistory } from 'react-router';
@@ -10,8 +11,9 @@ export default function configureStore(initialState?) {
   const middleware = [
     thunk,
     routerMiddleware(browserHistory),
-    logger,
   ];
+
+  !DISTRIBUTION && middleware.push(logger);
 
   const createStoreWithMiddleware = applyMiddleware(...middleware)(createStore);
 

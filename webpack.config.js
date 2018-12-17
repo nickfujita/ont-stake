@@ -7,7 +7,7 @@ const StyleLintPlugin = require('stylelint-webpack-plugin');
 module.exports = (env) => {
   const DISTRIBUTION = env && env.DISTRIBUTION === 'true';
 
-  let plugins = [
+  const plugins = [
     new HtmlWebpackPlugin({
       inlineSource: '.(js)$',
       template: 'src/index.html'
@@ -20,24 +20,13 @@ module.exports = (env) => {
       failOnError: false,
       quiet: false,
     }),
+    new webpack.DefinePlugin({
+      DISTRIBUTION,
+    })
   ];
 
-  if(DISTRIBUTION) {
-    plugins = plugins.concat([
-      new webpack.optimize.UglifyJsPlugin({
-        compressor: {
-          drop_console: true,
-          drop_debugger: true,
-          dead_code: true,
-        },
-        output: {
-          comments: false,
-        },
-      }),
-    ]);
-  }
-
   return {
+    mode: DISTRIBUTION ? 'production' : 'development',
     resolve: {
       extensions: ['.ts', '.tsx', '.js' , '.scss', '.png'],
     },
@@ -47,7 +36,7 @@ module.exports = (env) => {
       filename: 'bundle.js',
     },
     devServer: {
-      contentBase: path.join(__dirname, 'build'),
+      // contentBase: path.join(__dirname, 'build'),
       port: 9001,
       compress: false,
       https: false,
