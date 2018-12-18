@@ -33,3 +33,23 @@
   height: 1rem;
   width: 1rem;
 }
+
+.logo-alarm {
+  background-color: red;
+  -webkit-mask: url('../assets/alarm.svg') no-repeat 50% 50%;
+  -webkit-mask-size: contain;
+  mask: url('../assets/alarm.svg') no-repeat 50% 50%;
+  mask-size: contain;
+  height: 1rem;
+  width: 1rem;
+}
+
+.logo-info {
+  background-color: #2291f3;
+  -webkit-mask: url('../assets/info.svg') no-repeat 50% 50%;
+  -webkit-mask-size: contain;
+  mask: url('../assets/info.svg') no-repeat 50% 50%;
+  mask-size: contain;
+  height: 1rem;
+  width: 1rem;
+}

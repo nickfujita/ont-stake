@@ -1,6 +1,7 @@
 import * as React from 'react';
 import ClassNames from 'classnames';
 import { numberWithCommas, formatPercent } from '../utils/numbers';
+import Tooltip from './Tooltip';
 
 interface Props {
   node: any;
@@ -47,7 +48,11 @@ export default class StakeTotals extends React.Component<Props, any> {
 
         <div className='action-container'>
           <div className='contrib-percentage'>
-            <div className='logo-info' />
+            <Tooltip
+              className='current-stake-info'
+              title='Contributor rewards'
+              description='The amount of rewards distributed to the contributors that have Ontology staked in this node.'
+            />
             <div className='description'>{`Contributor rewards: ${formatPercent(userRewardsAllocation)}`}</div>
           </div>
           <div
