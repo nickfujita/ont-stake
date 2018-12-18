@@ -4,6 +4,11 @@
 
   .description {
     color: red;
+    display: flex;
+
+    .logo-clock {
+      margin-right: 0.25rem;
+    }
   }
 
   .remaining-blocks {
