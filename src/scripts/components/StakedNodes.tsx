@@ -27,7 +27,7 @@ export default class StakedNodes extends React.Component<Props, any> {
           </div>
         </div>
 
-        {!stakes ? this.renderEmpty() : this.renderStakes()}
+        {!Object.keys(stakes).length ? this.renderEmpty() : this.renderStakes()}
 
         <div
           className='link'

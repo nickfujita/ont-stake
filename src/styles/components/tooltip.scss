@@ -1,0 +1,44 @@
+.tooltip {
+  position: relative;
+  display: inline-block;
+  margin-right: 0.25rem;
+
+  .icon {
+    height: 0.7rem;
+    width: 0.7rem;
+  }
+
+  .popup-container {
+    position: absolute;
+    top: -0.75rem;
+    right: 50%;
+    background: aliceblue;
+    padding: 0.5rem;
+    transform: translate(100%, -100%);
+    width: 15rem;
+    font-size: 0.875rem;
+    text-align: left;
+    border-left: 0.75rem solid #448CCB;
+    border-radius: 0.5rem;
+
+    &::before {
+      content: '';
+      position: absolute;
+      bottom: -0.5rem;
+      width: 0.75rem;
+      height: 1rem;
+      background: transparent;
+      left: -0.75rem;
+      border-bottom: 0.5rem solid transparent;
+      border-left: 0.75rem solid #448CCB;
+    }
+
+    .title {
+      font-weight: 600;
+    }
+
+    .description {
+      font-size: 0.75rem;
+    }
+  }
+}

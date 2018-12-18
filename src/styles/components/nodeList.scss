@@ -55,6 +55,10 @@
     }
   }
 
+  .current-stake-info .popup-container {
+    width: 16rem;
+  }
+
   .table-header,
   .odd-row {
     background-color: aliceblue;
@@ -80,6 +84,9 @@
 
     .current-stake {
       flex: 30%;
+    }
+
+    .table-item .current-stake {
       display: flex;
       margin-right: 0.5rem;
 

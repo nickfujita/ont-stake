@@ -6,6 +6,7 @@ import { numberWithCommas, formatPercent } from '../utils/numbers';
 import StakeDistroBar from '../components/StakeDistroBar';
 import { getCache } from '../utils/cache';
 import { getNodeDistro } from '../utils/node';
+import Tooltip from '../components/Tooltip';
 
 interface Props {
   nodeList: any[];
@@ -115,8 +116,22 @@ class NodeList extends React.Component<Props, any> {
       <div className='table-header'>
         <div className='order'>{'#'}</div>
         <div className='name'>{'Name'}</div>
-        <div className='rewards'>{'Rewards'}</div>
-        <div className='current-stake'>{'Currently staked'}</div>
+        <div className='rewards'>
+          <Tooltip
+            className='rewards-info'
+            title='Contributor rewards'
+            description='The percentage of fees that are rewarded to contributors who have a stake in the node.'
+          />
+          {'Rewards'}
+        </div>
+        <div className='current-stake'>
+          <Tooltip
+            className='current-stake-info'
+            title='Currently staked'
+            description='The amount of Ontology currently staked in the node by its owners, other contributors and you.'
+          />
+          {'Currently staked'}
+        </div>
         <div className='distribution'>{'Distribution'}</div>
       </div>
     );
