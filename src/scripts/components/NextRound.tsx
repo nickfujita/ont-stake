@@ -12,7 +12,7 @@ export default class NextRound extends React.Component<Props, any> {
     return (
       <div className='next-round'>
         <div className='description'>
-          <div className='clock-logo'/>
+          <div className='logo-clock'/>
           <div>{'Next round in:'}</div>
         </div>
         <div className='remaining-blocks'>{`${remainingBlocks} Blocks`}</div>
