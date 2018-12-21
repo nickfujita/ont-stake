@@ -8,7 +8,7 @@
     font-size: 0.875rem;
 
     .info-container {
-      border-bottom: 1px solid lightgrey;
+      border-bottom: 1px solid #29344D;
       margin-bottom: 1rem;
     }
 
@@ -18,11 +18,13 @@
 
     .row {
       margin-bottom: 1rem;
+      color: white;
     }
 
     .bold-text {
       font-weight: 600;
       font-size: 1.25rem;
+      color: white;
     }
 
     .amounts-container {
@@ -32,10 +34,14 @@
     .amount {
       font-weight: 500;
       font-size: 2rem;
+      color: white;
     }
 
     .primary-btn {
       display: inline-block;
+      background-color: #FA7268;
+      border: none;
+      color: #1D2434;
     }
 
     .btn-container {

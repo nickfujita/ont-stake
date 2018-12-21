@@ -1,31 +1,36 @@
 .stake-totals-container {
   .total-stake {
-    padding: 1rem 0;
-    border-bottom: 1px solid lightgrey;
+    padding: 1rem;
+    border-bottom: 2px solid #191F2C;
+    background-color: #1D2434;
   }
 
   .description {
-    font-size: 0.875rem;
-    color: grey;
+    font-size: 0.85rem;
+    font-weight: 500;
+    line-height: 1rem;
+    color: #8D9199;
   }
 
   .total-container {
     display: flex;
     align-items: flex-end;
+    font-weight: 500;
 
     .total {
-      font-size: 1.5rem;
+      font-size: 1.75rem;
       margin-right: 0.5rem;
-      line-height: 1.75rem;
+      line-height: 1.9rem;
     }
   }
 
   .claims {
-    padding: 1rem 0;
-    border-bottom: 1px solid lightgrey;
+    padding: 1rem;
+    background-color: #1D2434;
 
     .row {
       display: flex;
+      font-weight: 500;
       margin-bottom: 0.5rem;
 
 
@@ -34,13 +39,14 @@
       }
 
       .primary-btn {
-        width: 5.5rem;
-        height: 1.5rem;
+        width: 4.5rem;
+        height: 1rem;
+        margin: auto;
       }
 
       &.empty {
         .primary-btn {
-          background-color: lightgrey;
+          background-color: #01D0FF;
           cursor: auto;
         }
       }
@@ -49,6 +55,7 @@
 
   .help {
     padding: 1rem 0;
+    padding-top: 2rem;
 
     .row {
       margin-bottom: 1rem;

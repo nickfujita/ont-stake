@@ -1,7 +1,10 @@
 body {
+  background: linear-gradient(315deg, #000000 0%, #1B2232 100%);
   font-family: 'avenir', 'Lato';
-  height: 100vh;
+  color: #FFFFFF;
+  height: 100%;
   margin: 0;
+
 
   #app {
     height: 100%;
@@ -15,8 +18,8 @@ body {
 
   .link {
     text-decoration: none;
-    color: #2291f3;
-    font-weight: 500;
+    color: #01D0FF;
+    font-weight: 700;
     cursor: pointer;
   }
 

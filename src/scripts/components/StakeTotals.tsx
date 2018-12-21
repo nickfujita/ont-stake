@@ -2,6 +2,7 @@ import * as React from 'react';
 import ClassNames from 'classnames';
 import Help from './Help';
 import { claimRewards, claimOng } from '../actions/dapi';
+import { numberWithCommas } from '../utils/numbers';
 
 interface Props {
   totalStake: number;
@@ -56,7 +57,7 @@ export default class StakeTotals extends React.Component<Props, State> {
       <div className='total-stake'>
         <div className='description'>{'TOTAL STAKE'}</div>
         <div className='total-container'>
-          <div className='total'>{totalStake || '0'}</div>
+          <div className='total'>{numberWithCommas(totalStake) || '0'}</div>
           <div>{'ONT'}</div>
         </div>
       </div>

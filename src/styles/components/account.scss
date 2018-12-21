@@ -1,13 +1,19 @@
 .account {
   text-align: right;
-  font-size: 0.875rem;
+  font-size: 0.75rem;
 
   .address {
-    font-weight: 600;
+    font-weight: 900;
+    line-height: 19px;
+  }
+
+  .amount {
+    font-weight: 500;
   }
 
   .disconnect {
     cursor: pointer;
-    color: red;
+    color: #8D9199;
+    font-weight: 900;
   }
 }

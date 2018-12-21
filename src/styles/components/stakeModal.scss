@@ -8,29 +8,39 @@
     font-size: 0.875rem;
 
     .info-container {
-      border-bottom: 1px solid lightgrey;
+      border-bottom: 1px solid #29344D;
       margin-bottom: 1rem;
     }
 
     .description {
-      color: grey;
+      color: #7E828C;
+      font-size: 0.75rem;
     }
 
     .row {
+      margin-bottom: 0.5rem;
+      color: #7E828C;
+    }
+
+    .row-last {
       margin-bottom: 1rem;
+      color: #7E828C;
     }
 
     .bold-text {
       font-weight: 600;
+      color: white;
     }
 
     .amounts-container {
       align-items: center;
+      margin-top: 1rem;
     }
 
     .amount {
       font-weight: 500;
       font-size: 2rem;
+      color: white;
     }
 
     .primary-btn {

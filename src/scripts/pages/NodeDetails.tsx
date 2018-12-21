@@ -118,7 +118,7 @@ class NodeDetails extends React.Component<Props, State> {
           className='link'
           onClick={() => goBack()}
         >
-          {'< Back'}
+          {'＜ Back'}
         </div>
 
         {!address ? <Connect dispatch={dispatch} /> : (

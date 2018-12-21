@@ -6,7 +6,6 @@
   .header {
     display: flex;
     padding: 0.5rem 1rem;
-    border-bottom: 1px solid lightgrey;
     height: 4rem;
     align-items: center;
 
@@ -25,14 +24,16 @@
     flex: 1;
 
     .left-side {
-      flex: 35%;
+      flex: 33%;
       padding: 1.5rem;
-      border-right: 1px solid lightgrey;
+      padding-right: 0;
     }
 
     .right-side {
-      flex: 65%;
+      flex: 67%;
       padding: 1.5rem;
+      padding-left: 1rem;
+
     }
   }
 }

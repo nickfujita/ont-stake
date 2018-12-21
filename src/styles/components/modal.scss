@@ -30,7 +30,7 @@
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
-    background: white;
+    background: #1F2B47;
     z-index: 1;
     border-radius: 0.25rem;
     padding: 1rem 1.5rem;
@@ -45,7 +45,7 @@
     padding-bottom: 0.5rem;
     font-size: 0.8125rem;
     align-items: flex-end;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.25rem;
     z-index: 1;
 
     .logo {
@@ -54,6 +54,9 @@
 
     .title {
       flex: 1;
+      color: #ADB0B5;
+      font-weight: 900;
+      font-size: 1.25rem;
     }
 
     .close {
@@ -66,5 +69,12 @@
   .content-body {
     flex: 1;
     position: relative;
+
+    .primary-btn {
+      background-color: rgba(1, 208, 255, 0.2);
+      border: 1px solid #01D0FF;
+      color: #01D0FF;
+      font-size: 0.75rem;
+    }
   }
 }

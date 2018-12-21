@@ -9,7 +9,7 @@
     height: 5px;
     cursor: pointer;
     border-radius: 1rem;
-    background-color: lightgrey;
+    background-color: #4A546B;
     margin-bottom: 0.75rem;
 
     &:focus {
@@ -18,10 +18,10 @@
 
     &::-webkit-slider-thumb {
       -webkit-appearance: none !important;
-      background-color: grey;
+      background-color: #1F2B47;
       height: 1.25rem;
       width: 1.25rem;
-      border: 0.25rem solid lightgreen;
+      border: 0.25rem solid #7ED321;
       border-radius: 1rem;
     }
   }

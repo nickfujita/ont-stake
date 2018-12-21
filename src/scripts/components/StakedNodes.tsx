@@ -23,7 +23,7 @@ export default class StakedNodes extends React.Component<Props, any> {
             className='primary-btn'
             onClick={() => dispatch(push('/nodelist'))}
           >
-            {'Create Stake'}
+            {'+ Create New Stake'}
           </div>
         </div>
 

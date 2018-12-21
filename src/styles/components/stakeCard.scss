@@ -3,7 +3,7 @@
   padding: 1rem;
   font-size: 0.75rem;
   align-items: center;
-  background-color: aliceblue;
+  background-color: #1D2434;
   margin: 0.75rem 0;
   cursor: pointer;
 
@@ -13,31 +13,35 @@
 
     .name {
       font-size: 1.5rem;
-      margin-bottom: 0.5rem;
+      padding-bottom: 0.25rem;
     }
 
     .stake-amounts {
       display: flex;
 
       .my-stake {
-        margin-right: 0.5rem;
+        margin-right: 1rem;
+        font-size: 0.9rem;
       }
 
       .active-stake {
         font-weight: 400;
-        color: grey;
+        color: #9498A3;
+        font-size: 0.8rem;
       }
     }
   }
 
   .contrib-percentage {
-    margin-bottom: 1rem;
+    margin-bottom: 0.75rem;
     color: grey;
     display: flex;
     align-items: center;
 
     .tooltip .popup-container {
       width: 9.5rem;
+      background-color: #212E4B;
+      color: #FFFFFF;
     }
   }
 
@@ -47,7 +51,8 @@
     align-items: flex-end;
 
     .action-text {
-      color: grey;
+      color: #9498A3;
+      font-weight: 900;
     }
   }
 }

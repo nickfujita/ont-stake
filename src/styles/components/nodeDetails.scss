@@ -14,9 +14,11 @@
 
   .primary-btn {
     height: 1rem;
-    font-size: 0.875rem;
+    font-size: 0.75rem;
     font-weight: 500;
     display: inline-block;
+    cursor: pointer;
+
   }
 
   .content-container {
@@ -27,8 +29,8 @@
     }
 
     .focus-text {
-      font-size: 2rem;
-      font-weight: 600;
+      font-size: 1.75rem;
+      font-weight: 500;
       margin-bottom: 0.75rem;
       height: 2.75rem;
     }
@@ -39,14 +41,19 @@
 
       .info-header {
         padding-bottom: 1rem;
-        border-bottom: 1px solid lightgrey;
+        border-bottom: 1px solid #29344D;
         margin-bottom: 1.5rem;
       }
 
       .distro-info {
         padding-bottom: 0.5rem;
-        border-bottom: 1px solid lightgrey;
+        border-bottom: 1px solid #29344D;
         margin-bottom: 1.5rem;
+        color: #83868B;
+
+        .focus-text {
+          color: white;
+        }
 
         .stake-distro-bar {
           height: 1rem;
@@ -54,8 +61,16 @@
         }
 
         .stake-distro-container .flex-container {
-          font-size: 0.875rem;
+          font-size: 0.75rem;
+          color: #83868B;
         }
+      }
+
+      .help {
+        font-size: 0.85rem;
+        font-weight: 500;
+        line-height: 1rem;
+        color: #8D9199;
       }
     }
 
@@ -64,26 +79,55 @@
 
       .row {
         margin-bottom: 1.5rem;
+
+        .stake-ont {
+          background-color: rgba(1, 208, 255, 0.2);
+          border: 1px solid #01D0FF;
+          color: #01D0FF;
+          width: 6rem;
+          display: flex;
+
+
+          &.disabled {
+            background-color: rgba(1, 208, 255, 0.2);
+            border: 1px solid #01D0FF;
+            color: #01D0FF;
+            cursor: auto;
+            width: 6rem;
+            opacity: 0.12;
+          }
+        }
       }
 
       .section-description {
         flex: 1;
         padding-left: 0.75rem;
+        padding-bottom: 0.5rem;
+        color: #ADB0B5;
+        font-size: 0.9rem;
+        font-weight: 900;
 
         &::before{
           content: '';
           display: inline-block;
-          width: 0.3rem;
-          height: 1rem;
+          width: 0.1875rem;
+          height: 0.75rem;
           transform: translate(-0.5rem, 0.1rem);
-          background-color: lightgreen;
+          background-color: #78C326;
         }
       }
 
       .staked-section {
         padding-bottom: 1.5rem;
-        border-bottom: 1px solid lightgrey;
+        border-bottom: 1px solid #2B2F39;
         margin-bottom: 3rem;
+
+        .request-withdraw-btn{
+          background-color: #FA7268;
+          color: #1D2434;
+          font-size: 0.75rem;
+          cursor: pointer;
+        }
       }
 
       .bold-text {
@@ -92,20 +136,31 @@
 
       .description {
         font-size: 0.75rem;
+
       }
 
       .disabled {
-        color: lightgrey;
+        color: #2B2F39;
 
         &.primary-btn {
           color: white;
-          background-color: lightgrey;
+          background-color: #FA7268;
           cursor: auto;
         }
 
         .primary-btn {
-          color: white;
-          background-color: lightgrey;
+          background-color: #01D0FF;
+          opacity: 0.12;
+          color: #1D2434;
+          font-size: 0.75rem;
+          cursor: auto;
+        }
+
+        .request-withdraw-btn{
+          background-color: #FA7268;
+          opacity: 0.12;
+          color: #1D2434;
+          font-size: 0.75rem;
           cursor: auto;
         }
       }

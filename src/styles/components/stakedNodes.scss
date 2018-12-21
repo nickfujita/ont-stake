@@ -5,7 +5,7 @@
 
   .empty-stake {
     text-align: center;
-    padding-top: 2rem;
+    padding-top: 7rem;
     font-size: 0.875rem;
     color: gray;
 
@@ -21,11 +21,14 @@
       font-size: 1.25rem;
       margin-bottom: 0.75rem;
     }
+  }
 
-    .primary-btn {
-      width: 6rem;
-      margin: auto;
-    }
+  .primary-btn {
+    width: 9rem;
+    margin: auto;
+    background-color: rgba(1, 208, 255, 0.2);
+    border: 1px solid #01D0FF;
+    color: #01D0FF;
   }
 
   .link {
@@ -40,6 +43,20 @@
 
     .title {
       flex: 1;
+      color: #ADB0B5;
+      font-size: 0.875rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      padding-left: 0.5rem;
+
+      &::before{
+        content: '';
+        display: inline-block;
+        width: 0.1875rem;
+        height: 0.75rem;
+        transform: translate(-0.5rem, 0.1rem);
+        background-color: #78C326;
+      }
     }
   }
 }

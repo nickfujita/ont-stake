@@ -1,13 +1,15 @@
 .next-round {
-  font-weight: 500;
+  font-weight: 700;
   margin-bottom: 1rem;
 
   .description {
-    color: red;
+    color: #FA7268;
     display: flex;
+    line-height: 22px;
 
     .logo-clock {
-      margin-right: 0.25rem;
+      margin-right: 0.4rem;
+      margin-top: 0.2rem;
     }
   }
 

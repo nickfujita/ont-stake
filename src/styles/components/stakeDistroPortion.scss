@@ -1,5 +1,7 @@
 .stake-distro-portion {
   display: flex;
+  color: white;
+  font-size: 0.875rem;
 
   .label {
     flex: 1;
@@ -15,19 +17,19 @@
     }
 
     &.purple::before {
-      background-color: purple;
+      background-color: #445895;
     }
 
     &.blue::before {
-      background-color: lightblue;
+      background-color: #68B5FA;
     }
 
     &.green::before {
-      background-color: lightgreen;
+      background-color: #7ED321;
     }
 
     &.grey::before {
-      background-color: grey;
+      background-color: #2B2F39;
     }
   }
 }

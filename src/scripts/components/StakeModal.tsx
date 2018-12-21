@@ -64,7 +64,7 @@ export default class StakeModal extends React.Component<Props, State> {
             <div className='bold-text'>{`${numberWithCommas(balance || 0)} ONT`}</div>
           </div>
 
-          <div className='flex-container row'>
+          <div className='flex-container row-last'>
             <div className='flex-grow-container'>{'Max stake:'}</div>
             <div className='bold-text'>{`${numberWithCommas(maxStake || 0)} ONT`}</div>
           </div>

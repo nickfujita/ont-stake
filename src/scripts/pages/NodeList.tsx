@@ -27,7 +27,7 @@ class NodeList extends React.Component<Props, any> {
           className='link'
           onClick={() => replace('/')}
         >
-          {'< My stakes'}
+          {'＜  My stakes'}
         </div>
 
         {this.renderLegend()}

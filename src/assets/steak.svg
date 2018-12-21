@@ -1,14 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg width="30px" height="29px" viewBox="0 0 30 29" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <!-- Generator: Sketch 52.5 (67469) - http://www.bohemiancoding.com/sketch -->
-    <title>🥩</title>
-    <desc>Created with Sketch.</desc>
-    <g id="V4_Desktop" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" font-family="AppleColorEmoji, Apple Color Emoji" font-size="32" font-weight="normal">
-        <g id="Home_NoStakes_nowalllet" transform="translate(-77.000000, -380.000000)" fill="#000000">
-            <g id="Header" transform="translate(0.000000, 26.000000)">
-                <text id="🥩">
-                    <tspan x="76" y="383">🥩</tspan>
-                </text>
+<svg width="20px" height="38px" viewBox="0 0 20 38" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: sketchtool 52.5 (67469) - http://www.bohemiancoding.com/sketch -->
+    <title>2FCC1C9A-F5CE-45BF-9701-3AB1A13AC27B@1.5x</title>
+    <desc>Created with sketchtool.</desc>
+    <defs>
+        <linearGradient x1="100%" y1="0%" x2="1.63754734%" y2="100%" id="linearGradient-1">
+            <stop stop-color="#02A7CD" offset="0%"></stop>
+            <stop stop-color="#51C4E9" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="100%" y1="0%" x2="1.63754734%" y2="100%" id="linearGradient-2">
+            <stop stop-color="#BE89F6" offset="0%"></stop>
+            <stop stop-color="#8F51E9" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="linearGradient-3">
+            <stop stop-color="#FAA461" offset="0%"></stop>
+            <stop stop-color="#FA7268" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="V4_Desktop" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Home_NoStakes" transform="translate(-20.000000, -30.000000)" fill-rule="nonzero">
+            <g id="Group-23" transform="translate(20.000000, 24.000000)">
+                <g id="Group-22" transform="translate(0.000000, 6.000000)">
+                    <path d="M20,0 L20,25 C20,32.1797017 14.1797017,38 7,38 L0,38 L0,20 C-1.3527075e-15,8.954305 8.954305,2.02906125e-15 20,0 Z" id="Rectangle" fill="url(#linearGradient-1)"></path>
+                    <path d="M20,6 L20,21 C20,30.3888407 12.3888407,38 3,38 L3,23 C3,13.6111593 10.6111593,6 20,6 Z" id="Rectangle" fill="url(#linearGradient-2)"></path>
+                    <path d="M20,14 L20,25 C20,32.1797017 14.1797017,38 7,38 L7,27 C7,19.8202983 12.8202983,14 20,14 Z" id="Rectangle" fill="url(#linearGradient-3)"></path>
+                </g>
             </g>
         </g>
     </g>

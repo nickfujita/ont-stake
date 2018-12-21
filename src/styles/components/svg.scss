@@ -8,8 +8,8 @@
 
 .logo-steak {
   background: url('../assets/steak.svg');
-  height: 2rem;
-  width: 2rem;
+  height: 2.375rem;
+  width: 1.75rem;
   background-size: contain;
   background-repeat: no-repeat;
 }
@@ -35,13 +35,13 @@
 }
 
 .logo-clock {
-  background-color: red;
+  background-color: #FA7268;
   -webkit-mask: url('../assets/clock.svg') no-repeat 50% 50%;
   -webkit-mask-size: contain;
   mask: url('../assets/clock.svg') no-repeat 50% 50%;
   mask-size: contain;
-  height: 1rem;
-  width: 1rem;
+  height: 0.8125rem;
+  width: 0.75rem;
 }
 
 .logo-info {
