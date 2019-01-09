@@ -15,7 +15,7 @@ class Unsupported extends React.Component<Props, any> {
       <div className='unsupported'>
         <div className='luna-confused'/>
         <h2 className='title'>
-          {'Opps, this platform is not yet supported.'}
+          {'Oops, this platform is not yet supported.'}
         </h2>
         <div className='row'>
           {'The Ontology staking application is currently supported on O3 desktop, with support for mobile coming soon.'}
