@@ -4,6 +4,7 @@ import Container from './pages/_container';
 import Home from './pages/Home';
 import NodeList from './pages/NodeList';
 import NodeDetails from './pages/NodeDetails';
+import Unsupported from './pages/Unsupported';
 
 export function getRoutes() {
   return (
@@ -11,6 +12,7 @@ export function getRoutes() {
       <IndexRoute component={Home} />
       <Route path='nodelist' component={NodeList} />
       <Route path='node/:publicKey' component={NodeDetails} />
+      <Route path='unsupported' component={Unsupported} />
     </Route>
   );
 }

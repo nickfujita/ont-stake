@@ -16,18 +16,33 @@ import { getCache } from '../utils/cache';
 export function init() {
   return dispatch => {
     o3dapi.initPlugins([o3dapiOnt]);
-    o3dapi.ONT.addEventListener(o3dapi.ONT.Constants.EventName.READY, () => {
-      o3dapi.ONT.getNetworks()
-      .then(networks => {
-        dispatch({
-          type: UPDATE_NETWORKS,
-          data: networks,
+    debugger;
+
+    if (!o3dapi.isAvailable) {
+      dispatch(replace('unsupported'));
+      return;
+    }
+
+    o3dapi.ONT.addEventListener(o3dapi.ONT.Constants.EventName.READY, (provider) => {
+      if (
+        provider &&
+        Array.isArray(provider.compatibility) &&
+        provider.compatibility.includes('ONT-STAKING')
+      ) {
+        o3dapi.ONT.getNetworks()
+        .then(networks => {
+          dispatch({
+            type: UPDATE_NETWORKS,
+            data: networks,
+          });
         });
-      });
-      dispatch(updateStakeRoundInfo());
-      dispatch(updateNodeList());
-      dispatch(connect());
-      dispatch(startDataRefresher());
+        dispatch(updateStakeRoundInfo());
+        dispatch(updateNodeList());
+        dispatch(connect());
+        dispatch(startDataRefresher());
+      } else {
+        dispatch(replace('unsupported'));
+      }
     });
   };
 }
