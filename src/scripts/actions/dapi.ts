@@ -370,7 +370,7 @@ export function withdrawStake(nodePublicKey, amount) {
       dispatch(addNotification(
         Date.now(),
         'Stake withdraw submitted',
-        `${amount} ONT has been submitted for withdraw, it will be moved to pending deposit shortly.`,
+        `${amount} ONT will be credited to your wallet shortly.`,
         4500,
       ));
 
