@@ -340,7 +340,7 @@ export function requestStakeWithdraw(nodePublicKey, amount) {
       dispatch(addNotification(
         Date.now(),
         'Stake withdraw request submitted',
-        `${amount} ONT has been requested to be withdrawn, it will be withdrawable in the next staking round.`,
+        `${amount} ONT has been requested to be withdrawn.`,
         4500,
       ));
 
