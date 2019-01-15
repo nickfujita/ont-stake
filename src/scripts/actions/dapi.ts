@@ -16,7 +16,6 @@ import { getCache } from '../utils/cache';
 export function init() {
   return dispatch => {
     o3dapi.initPlugins([o3dapiOnt]);
-    debugger;
 
     if (!o3dapi.isAvailable) {
       dispatch(replace('unsupported'));
