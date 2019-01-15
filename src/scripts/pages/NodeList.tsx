@@ -6,6 +6,7 @@ import { numberWithCommas, formatPercent } from '../utils/numbers';
 import StakeDistroBar from '../components/StakeDistroBar';
 import { getCache } from '../utils/cache';
 import { getNodeDistro } from '../utils/node';
+import { shortAddr } from '../utils/account';
 import Tooltip from '../components/Tooltip';
 
 interface Props {
@@ -70,6 +71,7 @@ class NodeList extends React.Component<Props, any> {
             openPercentage,
             name,
             publicKey,
+            address,
 
             activeUserStake,
             activeUserPendingStake,
@@ -87,7 +89,7 @@ class NodeList extends React.Component<Props, any> {
               onClick={() => dispatch(push(`/node/${publicKey}`))}
             >
               <div className='order'>{index + 1}</div>
-              <div className='name'>{name}</div>
+              <div className='name'>{name || shortAddr(address)}</div>
               <div className='rewards'>{formatPercent(userRewardsAllocation)}</div>
               <div className='current-stake'>
                 {numberWithCommas(totalStake)}

@@ -13,6 +13,7 @@ import ClassNames from 'classnames';
 import StakeModal from '../components/StakeModal';
 import WithdrawModal from '../components/WithdrawModal';
 import { withdrawStake } from '../actions/dapi';
+import { shortAddr } from '../utils/account';
 
 interface Props {
   nodeDetails: any;
@@ -82,7 +83,7 @@ class NodeDetails extends React.Component<Props, State> {
 
         {isStaking ? (
           <StakeModal
-            nodeName={node && node.name}
+            nodeName={node && node.name || shortAddr(node.address)}
             nodePublicKey={node && node.publicKey}
             account={account}
             balance={balances.ont}
