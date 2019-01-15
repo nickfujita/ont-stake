@@ -41,7 +41,7 @@ export default class WithdrawModal extends React.Component<Props, State> {
         <div className='amounts-container flex-container row'>
           <div className='flex-grow-container'>
             <div className='bold-text'>{'Amount'}</div>
-            <div className='description'>{'Amount must be a multiple of 500'}</div>
+            <div className='description'>{'Must be a multiple of 500'}</div>
           </div>
           <div className='amount'>{amount}</div>
         </div>
