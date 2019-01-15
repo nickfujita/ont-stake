@@ -9,6 +9,8 @@ body {
   height: 100%;
   margin: 0;
 
+  // TODO: remove once app is updated for mobile
+  min-width: 925px;
 
   #app {
     height: 100%;
