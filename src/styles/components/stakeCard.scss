@@ -33,7 +33,7 @@
   }
 
   .contrib-percentage {
-    margin-bottom: 0.75rem;
+    margin-bottom: 1.25rem;
     color: grey;
     display: flex;
     align-items: center;
@@ -53,6 +53,10 @@
     .action-text {
       color: #9498A3;
       font-weight: 900;
+
+      &.withdraw {
+        color: #FA7268;
+      }
     }
   }
 }
