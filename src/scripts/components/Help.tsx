@@ -6,8 +6,8 @@ export default function Help ({className}: {className?: string}) {
     <div className={ClassNames('help', className)}>
       <div className='description row'>{'Need help?'}</div>
       <div className='description row'>
-        {'Checkout our '}
-        <a href='https://o3.network' className='link'>{'Staking Guide'}</a>
+        {'Check out our '}
+        <a href='https://o3.network' className='link'>{'staking guide'}</a>
         {' for everything you need to know about staking ONT!'}
       </div>
     </div>

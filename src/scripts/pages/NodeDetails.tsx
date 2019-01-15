@@ -283,7 +283,7 @@ class NodeDetails extends React.Component<Props, State> {
           <div className={ClassNames('flex-container row', {'disabled': pendingWithdrawStake === 0})}>
             <div className='flex-grow-container'>
               <div className='bold-text'>{'Pending withdraw'}</div>
-              <div className='description'>{'After applying to withdrawl, actively staked ONT will be locked until the end of the current round, will continut to generate rewards until then.'}</div>
+              <div className='description'>{'After applying to withdraw, actively staked ONT will be locked until the end of the current round, will continue to generate rewards until then.'}</div>
             </div>
             <div className='bold-text'>{`${pendingWithdrawStake} ONT`}</div>
           </div>
