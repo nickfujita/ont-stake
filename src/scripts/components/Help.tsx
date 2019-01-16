@@ -7,7 +7,7 @@ export default function Help ({className}: {className?: string}) {
       <div className='description row'>{'Need help?'}</div>
       <div className='description row'>
         {'Check out our '}
-        <a href='https://o3.network' className='link'>{'staking guide'}</a>
+        <a href='https://docs.o3.network/docs/ontStake/' className='link'>{'staking guide'}</a>
         {' for everything you need to know about staking ONT!'}
       </div>
     </div>
