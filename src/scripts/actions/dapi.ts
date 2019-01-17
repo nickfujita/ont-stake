@@ -22,7 +22,7 @@ export function init() {
       return;
     }
 
-    o3dapi.ONT.addEventListener(o3dapi.ONT.Constants.EventName.READY, (provider) => {
+    o3dapi.ONT.addEventListener(o3dapi.ONT.Constants.EventName.READY, provider => {
       if (
         provider &&
         Array.isArray(provider.compatibility) &&
