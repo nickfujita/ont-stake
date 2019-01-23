@@ -14,20 +14,26 @@ import { addNotification, removeNotification } from './notifications';
 import { getCache } from '../utils/cache';
 
 export function init() {
-  return dispatch => {
+  return (dispatch, getState) => {
     o3dapi.initPlugins([o3dapiOnt]);
 
-    if (!o3dapi.isAvailable) {
-      dispatch(replace('unsupported'));
-      return;
-    }
+    const timeout = setTimeout(() => {
+      if (!o3dapi.isAvailable) {
+        dispatch(replace('unsupported'));
+      }
+    }, 1000);
 
     o3dapi.ONT.addEventListener(o3dapi.ONT.Constants.EventName.READY, provider => {
+      const { routing } = getState();
       if (
         provider &&
         Array.isArray(provider.compatibility) &&
         provider.compatibility.includes('ONT-STAKING')
       ) {
+        clearTimeout(timeout);
+        if (routing.locationBeforeTransitions.pathname === 'unsupported') {
+          dispatch(replace('/'));
+        }
         o3dapi.ONT.getNetworks()
         .then(networks => {
           dispatch({
