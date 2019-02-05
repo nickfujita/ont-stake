@@ -158,18 +158,6 @@
   resolved "https://registry.yarnpkg.com/@types/history/-/history-3.2.2.tgz#b6affa240cb10b5f841c6443d8a24d7f3fc8bb0c"
   integrity sha512-DMvBzeA2dp1uZZftXkoqPC4TrdHlyuuTabCOxHY6EAKOJRMaPVu8b6lvX0QxEGKZq3cK/h3JCSxgfKmbDOYmRw==
 
-"@types/lodash-es@4.17.1":
-  version "4.17.1"
-  resolved "https://registry.yarnpkg.com/@types/lodash-es/-/lodash-es-4.17.1.tgz#56745e5411558362aeca31def918f88f725dd29d"
-  integrity sha512-3EDZjphPfdjnsWvY11ufYImFMPyQJwIH1eFYRgWQsjOctce06fmNgVf5sfvXBRiaS1o0X50bAln1lfWs8ZO3BA==
-  dependencies:
-    "@types/lodash" "*"
-
-"@types/lodash@*":
-  version "4.14.118"
-  resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.14.118.tgz#247bab39bfcc6d910d4927c6e06cbc70ec376f27"
-  integrity sha512-iiJbKLZbhSa6FYRip/9ZDX6HXhayXLDGY2Fqws9cOkEQ6XeKfaxB0sC541mowZJueYyMnVUmmG+al5/4fCDrgw==
-
 "@types/prop-types@*":
   version "15.5.7"
   resolved "https://registry.yarnpkg.com/@types/prop-types/-/prop-types-15.5.7.tgz#c6f1e0d0109ff358b132d98b7b4025c7a7b707c5"
@@ -894,7 +882,7 @@ browserify-aes@^1.0.0, browserify-aes@^1.0.4:
     inherits "^2.0.1"
     safe-buffer "^5.0.1"
 
-browserify-cipher@^1.0.0:
+browserify-cipher@^1.0.0, browserify-cipher@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/browserify-cipher/-/browserify-cipher-1.0.1.tgz#8d6474c1b870bfdabcd3bcfcc1934a10e94f15f0"
   integrity sha512-sPhkz0ARKbf4rRQt2hTpAHqn47X3llLkUGn+xEJzLjwY8LRs2p0v7ljvI5EyoRO/mexrNunNECisZs+gw2zz1w==
@@ -955,7 +943,7 @@ bs58@^2.0.1:
   resolved "https://registry.yarnpkg.com/bs58/-/bs58-2.0.1.tgz#55908d58f1982aba2008fa1bed8f91998a29bf8d"
   integrity sha1-VZCNWPGYKrogCPob7Y+RmYopv40=
 
-bs58@^4.0.0, bs58@^4.0.1, bs58@~4.0.1:
+bs58@^4.0.0, bs58@^4.0.1:
   version "4.0.1"
   resolved "https://registry.yarnpkg.com/bs58/-/bs58-4.0.1.tgz#be161e76c354f6f788ae4071f63f34e8c4f0a42a"
   integrity sha1-vhYedsNU9veIrkBx9j806MTwpCo=
@@ -1483,7 +1471,7 @@ cosmiconfig@^5.0.0:
     js-yaml "^3.9.0"
     parse-json "^4.0.0"
 
-create-ecdh@^4.0.0:
+create-ecdh@^4.0.0, create-ecdh@^4.0.3:
   version "4.0.3"
   resolved "https://registry.yarnpkg.com/create-ecdh/-/create-ecdh-4.0.3.tgz#c9111b6f33045c4697f144787f9254cdc77c45ff"
   integrity sha512-GbEHQPMOswGpKXM9kCWVrremUcBmjteUaQ01T9rkKCPDXfUHX0IoP9LpHYo2NPFampa4e+/pFDc3jQdxrxQLaw==
@@ -1559,7 +1547,7 @@ crypto-browserify@^3.11.0:
     randombytes "^2.0.0"
     randomfill "^1.0.3"
 
-crypto-js@^3.1.9-1, crypto-js@~3.1.9-1:
+crypto-js@^3.1.9-1:
   version "3.1.9-1"
   resolved "https://registry.yarnpkg.com/crypto-js/-/crypto-js-3.1.9-1.tgz#fda19e761fc077e01ffbfdc6e9fdfc59e8806cd8"
   integrity sha1-/aGedh/Ad+Af+/3G6f38WeiAbNg=
@@ -4318,21 +4306,20 @@ number-is-nan@^1.0.0:
   resolved "https://registry.yarnpkg.com/number-is-nan/-/number-is-nan-1.0.1.tgz#097b602b53422a522c1afb8790318336941a011d"
   integrity sha1-CXtgK1NCKlIsGvuHkDGDNpQaAR0=
 
-o3-dapi-core@0.0.10:
-  version "0.0.10"
-  resolved "https://registry.yarnpkg.com/o3-dapi-core/-/o3-dapi-core-0.0.10.tgz#8bc8e00621ab96aafe9b753f8e7a4e1cd439ad8e"
-  integrity sha512-s3xXYKRZXRqQ/z9M9OzQHV9HU05gEv9O4p50dXkeQyjxRztR1cvB1l8rvdWu8K0IlNtU3tLtW9aeuW8VWCFSyg==
+o3-dapi-core@0.1.0:
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/o3-dapi-core/-/o3-dapi-core-0.1.0.tgz#b2c09165fa953603065ec66ecf99ecf5d9776c3c"
+  integrity sha512-EipahlgyTbCPcZeyZXqX1zssCMvYd4JEc6aIJR3MyoPHw5O8aKsCLjQrL1S6HNoACYpqBCsOwwhPVxF+zaQYxA==
   dependencies:
-    "@types/lodash-es" "4.17.1"
-    bs58 "~4.0.1"
-    crypto-js "~3.1.9-1"
+    browserify-cipher "^1.0.1"
+    create-ecdh "^4.0.3"
     lodash-es "4.17.11"
     socket.io-client "~2.2.0"
 
-o3-dapi-ont@0.0.11:
-  version "0.0.11"
-  resolved "https://registry.yarnpkg.com/o3-dapi-ont/-/o3-dapi-ont-0.0.11.tgz#2f35b052b8e5fc4e3b86800909221899356c00c9"
-  integrity sha512-jf+WypJWBwtWe7jKUPY9Jp96GSJd7C5gUz2Ebyc/aL+1NCo0PAtGSdGWKZWujsX93PiU0Q/OqEPg1h+ySp5inQ==
+o3-dapi-ont@0.0.14:
+  version "0.0.14"
+  resolved "https://registry.yarnpkg.com/o3-dapi-ont/-/o3-dapi-ont-0.0.14.tgz#078335b81af057a5ac03d3a7816ff317c8a27f23"
+  integrity sha512-Lfn2mvyDBIpxdkL+VO0Sr6josVewrdFTZe3HrAJ6dRrqdc8mAsoM5ZO+UDPp2jPHhinOdaICP5RCtMV2LqpFjA==
 
 oauth-sign@~0.9.0:
   version "0.9.0"
