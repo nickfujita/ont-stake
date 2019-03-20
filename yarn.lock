@@ -4314,14 +4314,16 @@ number-is-nan@^1.0.0:
   resolved "https://registry.yarnpkg.com/number-is-nan/-/number-is-nan-1.0.1.tgz#097b602b53422a522c1afb8790318336941a011d"
   integrity sha1-CXtgK1NCKlIsGvuHkDGDNpQaAR0=
 
-o3-dapi-core@0.1.1:
-  version "0.1.1"
-  resolved "https://registry.yarnpkg.com/o3-dapi-core/-/o3-dapi-core-0.1.1.tgz#b0cfcb5aa92d57526a24d5a0d5ff7a54675a2914"
-  integrity sha512-9esYxWjUnwGQ+KCiFseyik42CuezLRvtwe5fB3Zv9wbWmycCJ1sO9mYFpCkPl6ei/VZ7SiY5RqXxOnB29Zezrg==
+o3-dapi-core@0.3.2:
+  version "0.3.2"
+  resolved "https://registry.yarnpkg.com/o3-dapi-core/-/o3-dapi-core-0.3.2.tgz#579a89d0333415d3e4ea613176d16cfa35cb912e"
+  integrity sha512-zpZ6F7nHtmuGwMqzWJ67QNKWPIvYCVU3QmDxs4yD5Ux/61fszzYya36ZFKh/hWDPJCtjCY4doEYpYXR6uJaA6Q==
   dependencies:
     browserify-cipher "~1.0.1"
+    bs58 "^4.0.1"
     buffer "~5.2.1"
     create-ecdh "~4.0.3"
+    crypto-js "^3.1.9-1"
     lodash-es "4.17.11"
     randomfill "~1.0.4"
     socket.io-client "~2.2.0"
