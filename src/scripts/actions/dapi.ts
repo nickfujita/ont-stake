@@ -49,6 +49,10 @@ export function init() {
         dispatch(replace('unsupported'));
       }
     });
+
+    o3dapi.ONT.addEventListener(o3dapi.ONT.Constants.EventName.DISCONNECTED, () => {
+      dispatch({type: DISCONNECT});
+    });
   };
 }
 
