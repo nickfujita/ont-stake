@@ -8,7 +8,6 @@ import {
 } from '../constants/actions';
 import o3dapi from 'o3-dapi-core';
 import o3dapiOnt from 'o3-dapi-ont';
-import o3dapiOntClient from 'o3-dapi-ontclient';
 import { replace } from 'react-router-redux';
 import { putCache } from './cache';
 import { addNotification, removeNotification } from './notifications';
@@ -17,13 +16,17 @@ import { getCache } from '../utils/cache';
 export function init() {
   return (dispatch, getState) => {
     o3dapi.initPlugins([o3dapiOnt]);
-    o3dapi.ONT.setClientPlugin(o3dapiOntClient);
 
     dispatch(updateStakeRoundInfo());
     dispatch(updateNodeList());
     dispatch(startDataRefresher());
 
     o3dapi.ONT.addEventListener(o3dapi.ONT.Constants.EventName.READY, (provider) => {
+      if (
+        provider &&
+        Array.isArray(provider.compatibility) &&
+        provider.compatibility.includes('ONT-STAKING')
+      ) {
         o3dapi.ONT.getNetworks()
         .then(networks => {
           dispatch({
@@ -35,6 +38,9 @@ export function init() {
         dispatch(updateNodeList());
         dispatch(startDataRefresher());
         dispatch(connect());
+      } else {
+        dispatch(replace('unsupported'));
+      }
     });
 
     o3dapi.ONT.addEventListener(o3dapi.ONT.Constants.EventName.DISCONNECTED, () => {
