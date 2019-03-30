@@ -54,7 +54,7 @@
     "jquery": "^3.3.1",
     "o3-dapi-core": "^0.3.2",
     "o3-dapi-ont": "^0.3.0",
-    "o3-dapi-ontclient": "^0.0.2",
+    "o3-dapi-ontclient": "^0.0.3",
     "ontology-ts-sdk": "^1.0.9",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
