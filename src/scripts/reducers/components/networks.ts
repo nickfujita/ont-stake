@@ -2,7 +2,7 @@ import {
   UPDATE_NETWORKS,
 } from '../../constants/actions';
 
-const initialState = [];
+const initialState = ['MainNet'];
 
 export default function dapi(state = initialState, action) {
   switch (action.type) {

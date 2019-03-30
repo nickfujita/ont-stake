@@ -8,6 +8,7 @@ import {
 } from '../constants/actions';
 import o3dapi from 'o3-dapi-core';
 import o3dapiOnt from 'o3-dapi-ont';
+import o3dapiOntClient from 'o3-dapi-ontclient';
 import { replace } from 'react-router-redux';
 import { putCache } from './cache';
 import { addNotification, removeNotification } from './notifications';
@@ -16,33 +17,24 @@ import { getCache } from '../utils/cache';
 export function init() {
   return dispatch => {
     o3dapi.initPlugins([o3dapiOnt]);
-    debugger;
+    o3dapi.ONT.setClientPlugin(o3dapiOntClient);
 
-    if (!o3dapi.isAvailable) {
-      dispatch(replace('unsupported'));
-      return;
-    }
+    dispatch(updateStakeRoundInfo());
+    dispatch(updateNodeList());
+    dispatch(startDataRefresher());
 
     o3dapi.ONT.addEventListener(o3dapi.ONT.Constants.EventName.READY, (provider) => {
-      if (
-        provider &&
-        Array.isArray(provider.compatibility) &&
-        provider.compatibility.includes('ONT-STAKING')
-      ) {
         o3dapi.ONT.getNetworks()
         .then(networks => {
           dispatch({
             type: UPDATE_NETWORKS,
             data: networks,
           });
-        });
+        }).catch(() => {});
         dispatch(updateStakeRoundInfo());
         dispatch(updateNodeList());
-        dispatch(connect());
         dispatch(startDataRefresher());
-      } else {
-        dispatch(replace('unsupported'));
-      }
+        dispatch(connect());
     });
   };
 }
@@ -105,7 +97,9 @@ export function connect() {
       dispatch(getUnclaimed(account.address));
       dispatch(getStakes(account.address));
     })
-    .catch(() => {});
+    .catch(() => {
+      o3dapi.openO3();
+    });
   };
 }
 
