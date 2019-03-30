@@ -15,7 +15,7 @@ import { addNotification, removeNotification } from './notifications';
 import { getCache } from '../utils/cache';
 
 export function init() {
-  return dispatch => {
+  return (dispatch, getState) => {
     o3dapi.initPlugins([o3dapiOnt]);
     o3dapi.ONT.setClientPlugin(o3dapiOntClient);
 
@@ -35,6 +35,10 @@ export function init() {
         dispatch(updateNodeList());
         dispatch(startDataRefresher());
         dispatch(connect());
+    });
+
+    o3dapi.ONT.addEventListener(o3dapi.ONT.Constants.EventName.DISCONNECTED, () => {
+      dispatch({type: DISCONNECT});
     });
   };
 }
@@ -335,7 +339,7 @@ export function requestStakeWithdraw(nodePublicKey, amount) {
       dispatch(addNotification(
         Date.now(),
         'Stake withdraw request submitted',
-        `${amount} ONT has been requested to be withdrawn, it will be withdrawable in the next staking round.`,
+        `${amount} ONT has been requested to be withdrawn.`,
         4500,
       ));
 
@@ -365,7 +369,7 @@ export function withdrawStake(nodePublicKey, amount) {
       dispatch(addNotification(
         Date.now(),
         'Stake withdraw submitted',
-        `${amount} ONT has been submitted for withdraw, it will be moved to pending deposit shortly.`,
+        `${amount} ONT will be credited to your wallet shortly.`,
         4500,
       ));
 
